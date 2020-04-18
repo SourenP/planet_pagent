@@ -15,15 +15,17 @@ public class GameHandler : MonoBehaviour
     public GameObject m_asteroidPrefab;
     public BackgroundHandler m_backgroundHandler;
 
+
+    public TextureGenerator m_textureGenerator;
     Texture2D m_astroidTexture;
     
     // Start is called before the first frame update
     void Start()
     {
         m_camera.orthographicSize = m_cameraSizeStart;
-        
+        m_astroidTexture = m_textureGenerator.GenerateTexture(256, 256, 100f);
 
-        for(int i = 0; i < m_astroidCount; ++i)
+        for (int i = 0; i < m_astroidCount; ++i)
         { 
             SpawnAsteroid();
         }

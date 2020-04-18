@@ -72,7 +72,7 @@
     <Compile Include="Assets\Scripts\PolyGen.cs" />
     <Compile Include="Assets\Scripts\StarfieldBaseSettings.cs" />
     <Compile Include="Assets\Scripts\StarfieldHandler.cs" />
-    <Compile Include="Assets\TextureGenerator.cs" />
+    <Compile Include="Assets\Scripts\TextureGenerator.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Ludum/planet_pagent/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
