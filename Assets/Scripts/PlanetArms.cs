@@ -13,6 +13,12 @@ public class PlanetArms : MonoBehaviour
     public float thresholdAngle = 30;
     public float maxArmLength = 0.5f;
     public float armWidth = 0.1f;
+    public double leftArmOffsetAngle = Math.PI;
+
+    public ArmLine armLinePrefab;
+
+    ArmLine leftArm;
+    ArmLine rightArm; 
 
     // Debug point
     Transform pointTransform;
@@ -21,9 +27,18 @@ public class PlanetArms : MonoBehaviour
         Renderer renderer = gameObject.GetComponent<Renderer>(); // not sure if this will scale properly
         sphereRadius = renderer.bounds.extents.x;
         sphereTransform = gameObject.GetComponent<Transform>();
-        lineRenderer = gameObject.GetComponent<LineRenderer>();
-        lineRenderer.startWidth = armWidth;
-        lineRenderer.endWidth = armWidth;
+
+        leftArm = Instantiate(armLinePrefab, sphereTransform);
+        LineRenderer leftArmLineRenderer = leftArm.GetComponent<LineRenderer>();
+        leftArmLineRenderer.startWidth = armWidth;
+        leftArmLineRenderer.endWidth = armWidth;
+        leftArm.angleOffset = leftArmOffsetAngle;
+
+        rightArm = Instantiate(armLinePrefab, sphereTransform);
+        LineRenderer rightArmLineRenderer = rightArm.GetComponent<LineRenderer>();
+        rightArmLineRenderer.startWidth = armWidth;
+        rightArmLineRenderer.endWidth = armWidth;
+        rightArm.angleOffset = 0;
     }
 
     // Start is called before the first frame update
@@ -32,13 +47,16 @@ public class PlanetArms : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        DrawArm();        
+        double mouseAngle = GetMouseAngle();
+        UpdateArm(ref leftArm);
+        UpdateArm(ref rightArm);
     }
 
 
-    void DrawArm() {
-        Vector3 pointOnCirclePos = GetPointOnCircleRestricted(
-            GetMouseAngle(), sphereRadius, thresholdAngle * Math.PI / 180f, -thresholdAngle * Math.PI / 180f);
+    void UpdateArm(ref ArmLine arm) {
+        double maxAngle = arm.angleOffset + degToRad(thresholdAngle);
+        double minAngle = arm.angleOffset - degToRad(thresholdAngle);
+        Vector3 pointOnCirclePos = GetPointOnCircleRestricted(GetMouseAngle(), sphereRadius, minAngle, maxAngle);
 
         Vector3 armStart = pointOnCirclePos + sphereTransform.position;
         Vector3 armEnd = GetMousePosition(Vector3.zero);
@@ -48,11 +66,14 @@ public class PlanetArms : MonoBehaviour
             armEnd = armStart + (armDirection * maxArmLength);
         }
 
-        lineRenderer.SetPosition(0, armStart);
-        lineRenderer.SetPosition(1, armEnd);
+        arm.start = armStart;
+        arm.end = armEnd;
     }
 
-    Vector3 GetPointOnCircleRestricted(double angle, float radius, double maxAngle, double minAngle) {
+    Vector3 GetPointOnCircleRestricted(double angle, float radius, double angleOne, double angleTwo) {
+        angle = angle > Math.PI && angleOne < 0 ? angle - (2f * Math.PI) : angle;
+        double minAngle = angleOne;
+        double maxAngle = angleTwo;
         angle = Math.Max(minAngle, angle);
         angle = Math.Min(maxAngle, angle);
         return GetPointOnCircle(angle, radius);
@@ -66,8 +87,9 @@ public class PlanetArms : MonoBehaviour
     // Returns the angle in radians between the center of the sphere and the mouse relative to the x axis
     // Goes positive in the counterclockwise direction until PI and negative in clockwise until -PI
     double GetMouseAngle() {
-        Vector3 mouseWorldPos = GetMousePosition(sphereTransform.transform.position);
-        return Mathf.Atan2(mouseWorldPos.y, mouseWorldPos.x);
+        Vector3 mouseWorldPos = GetMousePosition(sphereTransform.position);
+        double angle =  Mathf.Atan2(mouseWorldPos.y, mouseWorldPos.x);
+        return angle > 0 ? angle : ((2f * Math.PI) + angle);
     }
 
     // Returns mouse position relative to point
@@ -77,5 +99,12 @@ public class PlanetArms : MonoBehaviour
         cameraPoint.z = distanceToPlayer;
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(cameraPoint);
         return mouseWorldPos - point;
+    }
+
+    double degToRad(double deg) {
+        double rad = deg * Math.PI / 180f;
+        rad = rad > 0 ? rad : ((2f * Math.PI) + rad);
+        Debug.Log("rad " + rad);
+        return rad;
     }
 }

@@ -525,6 +525,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 133995966, guid: 0a44eddd94a183c4b91caa74cbaa5fb7, type: 3}
+      propertyPath: armLinePrefab
+      value: 
+      objectReference: {fileID: 4377819594604637603, guid: 9c003b9023464ba48bec0e822070a7e4,
+        type: 3}
+    - target: {fileID: 133995966, guid: 0a44eddd94a183c4b91caa74cbaa5fb7, type: 3}
+      propertyPath: maxArmLength
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6401072436286367927, guid: 0a44eddd94a183c4b91caa74cbaa5fb7,
         type: 3}
       propertyPath: m_Name
@@ -543,7 +552,7 @@ PrefabInstance:
     - target: {fileID: 6401072436286367931, guid: 0a44eddd94a183c4b91caa74cbaa5fb7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6401072436286367931, guid: 0a44eddd94a183c4b91caa74cbaa5fb7,
         type: 3}
