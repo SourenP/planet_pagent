@@ -301,3 +301,11 @@ C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.dll
 C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.pdb
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Postprocessing.Editor.dll
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Postprocessing.Runtime.dll
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.ProGrids.dll
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.ProGrids.Editor.dll
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.ProGrids.pdb
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.ProGrids.Editor.pdb
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Postprocessing.Editor.pdb
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Postprocessing.Runtime.pdb
