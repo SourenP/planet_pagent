@@ -535,16 +535,6 @@ PrefabInstance:
       propertyPath: m_sun
       value: 
       objectReference: {fileID: 1365803926}
-    - target: {fileID: 6401072436286367930, guid: 0a44eddd94a183c4b91caa74cbaa5fb7,
-        type: 3}
-      propertyPath: m_height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6401072436286367930, guid: 0a44eddd94a183c4b91caa74cbaa5fb7,
-        type: 3}
-      propertyPath: m_width
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6401072436286367931, guid: 0a44eddd94a183c4b91caa74cbaa5fb7,
         type: 3}
       propertyPath: m_LocalPosition.x
