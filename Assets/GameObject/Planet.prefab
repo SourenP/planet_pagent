@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thresholdAngle: 30
-  maxArmLength: 1
+  maxArmLength: 4
   armWidth: 0.005
   leftArmOffsetAngle: 3.141592653589793
   armLinePrefab: {fileID: 4377819594604637603, guid: 9c003b9023464ba48bec0e822070a7e4,

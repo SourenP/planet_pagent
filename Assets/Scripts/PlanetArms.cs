@@ -33,12 +33,15 @@ public class PlanetArms : MonoBehaviour
         leftArmLineRenderer.startWidth = armWidth;
         leftArmLineRenderer.endWidth = armWidth;
         leftArm.angleOffset = leftArmOffsetAngle;
+        leftArm.maxArmLength = maxArmLength;
 
         rightArm = Instantiate(armLinePrefab, sphereTransform);
         LineRenderer rightArmLineRenderer = rightArm.GetComponent<LineRenderer>();
         rightArmLineRenderer.startWidth = armWidth;
         rightArmLineRenderer.endWidth = armWidth;
         rightArm.angleOffset = 0;
+        rightArm.maxArmLength = maxArmLength;
+
     }
 
     // Start is called before the first frame update
@@ -65,6 +68,9 @@ public class PlanetArms : MonoBehaviour
             Vector3 armDirection = (armEnd - armStart).normalized;
             armEnd = armStart + (armDirection * maxArmLength);
         }
+
+        armStart.z = 0;
+        armEnd.z = 0;
 
         arm.start = armStart;
         arm.end = armEnd;
