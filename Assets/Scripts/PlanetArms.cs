@@ -56,12 +56,14 @@ public class PlanetArms : MonoBehaviour
         double maxAngle = arm.angleOffset + degToRad(thresholdAngle);
         double minAngle = arm.angleOffset - degToRad(thresholdAngle);
         Vector3 pointOnCirclePos = GetPointOnCircleRestricted(GetMouseAngle(), sphereRadius, minAngle, maxAngle);
-
+        // Debug.Log("pointOnCirlcePos " + pointOnCirclePos);
         Vector3 armStart = pointOnCirclePos + sphereTransform.position;
         Vector3 armEnd = GetMousePosition(Vector3.zero);
         float armLength = Vector3.Distance(armStart, armEnd);
+        
         if (armLength > maxArmLength) {
             Vector3 armDirection = (armEnd - armStart).normalized;
+            // Debug.Log("armDirection  " + armDirection);
             armEnd = armStart + (armDirection * maxArmLength);
         }
 
@@ -90,13 +92,14 @@ public class PlanetArms : MonoBehaviour
     // Goes positive in the counterclockwise direction until PI and negative in clockwise until -PI
     double GetMouseAngle() {
         Vector3 mouseWorldPos = GetMousePosition(sphereTransform.position);
+        Debug.Log(mouseWorldPos);
         double angle =  Mathf.Atan2(mouseWorldPos.y, mouseWorldPos.x);
         return angle > 0 ? angle : ((2f * Math.PI) + angle);
     }
 
     // Returns mouse position relative to point
     Vector3 GetMousePosition(Vector3 point) {
-        float distanceToPlayer = Vector3.Distance(Camera.main.transform.position, point);
+        float distanceToPlayer = - Camera.main.transform.position.z + sphereTransform.position.z;
         Vector3 cameraPoint = Input.mousePosition;
         cameraPoint.z = distanceToPlayer;
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(cameraPoint);

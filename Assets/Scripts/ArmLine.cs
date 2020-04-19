@@ -32,7 +32,7 @@ public class ArmLine : MonoBehaviour
         openGloveTransform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         closedGloveTransform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         openGloveSpriteRenderer = openGlove.GetComponent<SpriteRenderer>(); 
-        closedGloveSpriteRenderer = closedGlove.GetComponent<SpriteRenderer>(); 
+        closedGloveSpriteRenderer = closedGlove.GetComponent<SpriteRenderer>();
 
         closedGloveSpriteRenderer.enabled = false;
     }
@@ -40,6 +40,10 @@ public class ArmLine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (angleOffset == 0) {
+            openGloveSpriteRenderer.flipX = true;
+            closedGloveSpriteRenderer.flipX = true;
+        }
     }
 
     // Update is called once per frame
