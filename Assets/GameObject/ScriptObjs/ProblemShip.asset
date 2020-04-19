@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: ProblemShip
   m_EditorClassIdentifier: Assembly-CSharp::PlanetProblem
-  speed: 0.2
+  speed: 2
   prefab: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
   problemType: 0
-  problemRarity: 1
+  problemRarity: 0
   behaviorScript: {fileID: 0}

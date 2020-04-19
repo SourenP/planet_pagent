@@ -13,19 +13,20 @@ public class GameHandler : MonoBehaviour
     public float m_astroidCount = 10f;
 
     public GameObject m_asteroidPrefab;
+    public GameObject m_shipPrefab;
     public GameObject m_orbitalProblemSpawner;
     public BackgroundHandler m_backgroundHandler;
 
     public PlanetController m_planet;
-    public ShipController m_ship;
 
     public TextureGenerator m_textureGenerator;
     Texture2D m_astroidTexture;
     
+
+
     // Start is called before the first frame update
     void Start()
     {
-        m_camera.orthographicSize = m_cameraSizeStart;
         m_astroidTexture = m_textureGenerator.GenerateTexture(256, 256, 100f);
 
         for (int i = 0; i < m_astroidCount; ++i)
@@ -35,12 +36,30 @@ public class GameHandler : MonoBehaviour
 
         m_backgroundHandler.Init();
         m_planet.Init();
-        m_ship.Init();
+
+        StartCoroutine(MaybeSpawnAProblem());
     }
+
+    IEnumerator MaybeSpawnAProblem()
+    {
+        yield return new WaitForSeconds(5);
+        int random = Random.Range(1, 100);
+        
+        if(random < 50)
+        {
+            GameObject ship = Instantiate(m_shipPrefab);
+            ship.transform.position = m_orbitalProblemSpawner.transform.position;
+            ship.GetComponent<ShipController>().m_planet = m_planet;
+            ship.GetComponent<ShipController>().Init();
+        }
+        StartCoroutine(MaybeSpawnAProblem());
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void Fracture(AsteroidController target)
