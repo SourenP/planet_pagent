@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_planetArms: {fileID: 133995966}
+  m_flickThreshold: 1
 --- !u!135 &1233080046
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -290,9 +291,11 @@ MonoBehaviour:
   m_spawnerFrontAngle: -30
   m_spawnerRearAngle: 100
   m_spawnerSpeed: 1
+  m_grabWithoutClick: 0
   m_myHands: {fileID: 1233080045}
   m_clockwise: 0
   m_angle: 0
+  m_holdingSomething: 0
 --- !u!114 &133995966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thresholdAngle: 30
-  maxArmLength: 4
+  maxArmLength: 0.5
   armWidth: 0.005
   leftArmOffsetAngle: 3.141592653589793
   armLinePrefab: {fileID: 4377819594604637603, guid: 9c003b9023464ba48bec0e822070a7e4,

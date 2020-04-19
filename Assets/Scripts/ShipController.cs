@@ -94,8 +94,9 @@ public class ShipController : MonoBehaviour
 
     public void Init()
     {
-        m_direction = getShipDirection(m_planet.m_angle, m_planet.m_speed, m_planet.m_width, m_planet.m_height, new Vector2(transform.position.x, transform.position.y), m_speed);
-        transform.forward = new Vector3(m_direction.x, 0, m_direction.y);
+        //m_direction = getShipDirection(m_planet.m_angle, m_planet.m_speed, m_planet.m_width, m_planet.m_height, new Vector2(transform.position.x, transform.position.y), m_speed);
+        //transform.forward = new Vector3(m_direction.x, 0, m_direction.y);
+        GetComponent<Grabbable>().m_planetController = m_planet;
     }
 
     // Update is called once per frame

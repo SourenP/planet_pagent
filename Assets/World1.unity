@@ -550,10 +550,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 133995966, guid: 0a44eddd94a183c4b91caa74cbaa5fb7, type: 3}
-      propertyPath: maxArmLength
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6401072436286367927, guid: 0a44eddd94a183c4b91caa74cbaa5fb7,
         type: 3}
       propertyPath: m_Name

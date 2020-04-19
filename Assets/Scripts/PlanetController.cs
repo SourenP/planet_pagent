@@ -15,6 +15,7 @@ public class PlanetController : MonoBehaviour
     public float m_spawnerRearAngle;
     public float m_spawnerSpeed;
 
+    public bool m_grabWithoutClick = false;
     public Hands m_myHands;
 
     public bool m_clockwise;
@@ -25,6 +26,8 @@ public class PlanetController : MonoBehaviour
     public float m_angle = 90;
     float m_spawnerAngle = 90;
     int m_spawnerDirection = 1; 
+
+    public bool m_holdingSomething = false;
 
     // Start is called before the first frame update
     public void Init()
@@ -93,6 +96,11 @@ public class PlanetController : MonoBehaviour
     public Vector3 GetHandVelocity()
     {
         return m_myHands.GetVelocity();
+    }
+
+    public bool CheckForFlick()
+    {
+        return m_myHands.HandleFlick();
     }
 
     private void OnDrawGizmos()

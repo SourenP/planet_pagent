@@ -59,7 +59,16 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetMouseButtonDown(1))
+        {
+            GameObject ship = Instantiate(m_shipPrefab);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            ship.transform.position = mousePos; 
+            ship.GetComponent<ShipController>().m_planet = m_planet;
+            ship.GetComponent<ShipController>().Init();
 
+        }
     }
 
     public void Fracture(AsteroidController target)

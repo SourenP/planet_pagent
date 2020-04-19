@@ -9,6 +9,8 @@ public class Hands : MonoBehaviour
     private List<Vector3> m_mouseBuffer;
     private Vector3 m_mouseVelocity;
 
+    public float m_flickThreshold = 1f;
+
     private Vector3 m_lastMousePosition;
 
     private const int MOUSE_BUFFER_MAX = 5;
@@ -22,30 +24,37 @@ public class Hands : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         transform.position = m_planetArms.GetMidPointOfHands();
-        //while(m_mouseBuffer.Count >= MOUSE_BUFFER_MAX)
-        //{
-        //    m_mouseBuffer.RemoveAt(0);
-        //}
+        while (m_mouseBuffer.Count >= MOUSE_BUFFER_MAX)
+        {
+            m_mouseBuffer.RemoveAt(0);
+        }
 
-        //m_mouseBuffer.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        m_mouseBuffer.Add(mousePosition - m_lastMousePosition);
 
-        //m_mouseVelocity = Vector3.zero;
+        m_mouseVelocity = m_mouseBuffer[m_mouseBuffer.Count-1];
 
-        //for(int i = 1; i < m_mouseBuffer.Count; ++i)
-        //{
-        //    m_mouseVelocity += m_mouseBuffer[i];
-        //}
+        for (int i = m_mouseBuffer.Count - 2; i > -1; --i)
+        {
+            m_mouseVelocity += m_mouseBuffer[i];
+        }
 
-        m_mouseVelocity = Camera.main.ScreenToWorldPoint(Input.mousePosition) - m_lastMousePosition;
-        m_lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //m_mouseVelocity = Camera.main.ScreenToWorldPoint(Input.mousePosition) - m_lastMousePosition;
+        m_lastMousePosition = mousePosition;
         m_mouseVelocity.z = 0;
         Debug.Log(m_mouseVelocity);
     }
 
+    public bool HandleFlick()
+    {
+        return false;
+    }
+
     public Vector3 GetVelocity()
     {
-        return m_mouseVelocity * 10;
+        return m_mouseVelocity * 5;
     }
 
     private void OnDrawGizmos()
