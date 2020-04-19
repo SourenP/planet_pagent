@@ -67,7 +67,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_polyGen: {fileID: 114372734114821606}
   m_gravityController: {fileID: 0}
-  m_face: {fileID: 0}
   m_linearSpeed: 0.3
   m_angularSpeed: 0
   m_absorbedCount: 0
@@ -77,7 +76,7 @@ MonoBehaviour:
   m_absorbMassThreshold: 0.2
   m_rigidBody: {fileID: 54270365246137156}
   m_forceMode: 1
-  m_mass: 0.5
+  m_mass: 0.1
   m_attached: 0
   m_absorbedParticleEffect: {fileID: 1706969793557724, guid: 640f116f24e788d4485a6e9063982fa0,
     type: 3}

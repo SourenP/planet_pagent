@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6204583153936912939}
   - component: {fileID: 6204583153936912940}
+  - component: {fileID: 1412835387}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,15 +47,24 @@ MonoBehaviour:
   m_camera: {fileID: 0}
   m_cameraSizeStart: 3
   m_cameraSizeMax: 10
-  m_player: {fileID: 1932728500440848, guid: cc97cc80fa4ed5f46a91090f7d30547c, type: 3}
-  m_playerState: 0
-  m_playerStartingMass: 0.5
-  m_asteroidToChainMass: 5
-  m_chainToEvolveMass: 10
-  m_hostileAsteroidMaxMassDeviation: 0.2
   m_asteroidDespawnBuffer: 3
-  m_astroidCount: 10
-  m_asteroidPrefab: {fileID: 1082903435403936, guid: a58935431a0eb044e9996fdcff159cc9,
+  m_astroidCount: 2
+  m_asteroidPrefab: {fileID: 1082903435403936, guid: 53f45aab05a982b4284b45ec719295a9,
     type: 3}
+  m_orbitalProblemSpawner: {fileID: 0}
   m_backgroundHandler: {fileID: 0}
-  m_textureGenerator: {fileID: 0}
+  m_planet: {fileID: 0}
+  m_ship: {fileID: 0}
+  m_textureGenerator: {fileID: 1412835387}
+--- !u!114 &1412835387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6204583153936912941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00728a68fe657a449ad8835167d910d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,4 +11,16 @@ public class StarfieldBaseSettings : ScriptableObject
     public float fieldWidth = 20f;
     public float fieldHeight = 25f;
     public bool colorize = false;
+
+    public void CreateInstance()
+    {
+        maxStars = 100;
+        starSize = 0.1f;
+        starSizeRange = 0.5f;
+        parallaxFactor = 0.5f;
+        fieldWidth = 20f;
+        fieldHeight = 25f;
+        colorize = false;
+    }
+
 }

@@ -104,7 +104,7 @@ public class PlanetArms : MonoBehaviour
     double degToRad(double deg) {
         double rad = deg * Math.PI / 180f;
         rad = rad > 0 ? rad : ((2f * Math.PI) + rad);
-        Debug.Log("rad " + rad);
+        //Debug.Log("rad " + rad);
         return rad;
     }
 }

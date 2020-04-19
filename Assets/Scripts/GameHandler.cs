@@ -13,8 +13,11 @@ public class GameHandler : MonoBehaviour
     public float m_astroidCount = 10f;
 
     public GameObject m_asteroidPrefab;
+    public GameObject m_orbitalProblemSpawner;
     public BackgroundHandler m_backgroundHandler;
 
+    public PlanetController m_planet;
+    public ShipController m_ship;
 
     public TextureGenerator m_textureGenerator;
     Texture2D m_astroidTexture;
@@ -31,6 +34,8 @@ public class GameHandler : MonoBehaviour
         }
 
         m_backgroundHandler.Init();
+        m_planet.Init();
+        m_ship.Init();
     }
 
     // Update is called once per frame
@@ -75,7 +80,7 @@ public class GameHandler : MonoBehaviour
 
     public void RandomizeAsteroid(AsteroidController ast)
     {
-        float mass = 1;
+        float mass = 0.2f;
         AsteroidController.AstroidType astType;
         
 
@@ -151,5 +156,7 @@ public class GameHandler : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(camPos, spawnAreaOuterTR - spawnAreaOuterBL);
+
+        Gizmos.DrawSphere(m_orbitalProblemSpawner.transform.position, 0.5f);
     }
 }

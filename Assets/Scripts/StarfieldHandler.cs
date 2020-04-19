@@ -66,8 +66,12 @@ public class StarfieldHandler : MonoBehaviour
 
     public void Step(Vector3 cameraPos)
     {
-        for (int i = 0; i < m_maxStars; i++)
+        if (m_stars == null)
+            return;
+        for (int i = 0; i < m_maxStars - 1; i++)
         {
+            if (m_stars == null || cameraPos == null || m_stars.Length < i || transform == null)
+                continue;
             Vector3 pos = m_stars[i].position + transform.position;
 
             if (pos.x < (cameraPos.x - m_xOffset))
