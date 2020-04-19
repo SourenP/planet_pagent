@@ -52,7 +52,7 @@ public class PlanetController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_angle += m_speed;
+        m_angle += m_speed * Time.deltaTime;
         
         m_position = NextPosition3d(m_angle);
         this.gameObject.transform.position = m_position;
