@@ -35,6 +35,15 @@ public class ArmLine : MonoBehaviour
         closedGloveSpriteRenderer = closedGlove.GetComponent<SpriteRenderer>();
 
         closedGloveSpriteRenderer.enabled = false;
+
+        AnimationCurve curve = new AnimationCurve();
+        curve.AddKey(0.0f,   1.0f);
+        curve.AddKey(0.25f,  2.0f);
+        curve.AddKey(0.5f,   1.0f);
+        curve.AddKey(0.625f, 1.5f);
+        curve.AddKey(1.0f,   1.0f);
+        lineRenderer.widthCurve = curve;
+        lineRenderer.widthMultiplier = 0.015f;
     }
 
     // Start is called before the first frame update
