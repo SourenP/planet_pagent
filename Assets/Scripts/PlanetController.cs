@@ -33,9 +33,7 @@ public class PlanetController : MonoBehaviour
     public void Init()
     {
         m_center = m_sun.transform.position;
-        m_position.x = m_center.x + (m_width * Mathf.Cos(m_angle * Mathf.Deg2Rad));
-        m_position.y = m_center.y + (m_height * Mathf.Sin(m_angle * Mathf.Deg2Rad));
-        m_position.z = 1f;
+        m_position = NextPosition3d(m_angle);
         this.gameObject.transform.position = m_position;
 
         if (m_clockwise)
@@ -54,13 +52,25 @@ public class PlanetController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_angle += m_speed;
+        m_angle += m_speed * Time.deltaTime;
         
-        m_position.x = m_center.x + (m_width * Mathf.Cos(m_angle * Mathf.Deg2Rad));
-        m_position.y = m_center.y + (m_height * Mathf.Sin(m_angle * Mathf.Deg2Rad));
+        m_position = NextPosition3d(m_angle);
         this.gameObject.transform.position = m_position;
 
         UpdateSpawner();
+    }
+
+    public Vector3 NextPosition3d(float angle) {
+        Vector2 position_2d = NextPosition2d(angle);
+        Vector3 position_3d = new Vector3(position_2d.x, position_2d.y, 1f);
+        return position_3d;
+    }
+
+    public Vector2 NextPosition2d(float angle) {
+        return new Vector2(
+            m_center.x + (m_width * Mathf.Cos(angle * Mathf.Deg2Rad)),
+            m_center.y + (m_height * Mathf.Sin(angle * Mathf.Deg2Rad))
+        );
     }
 
     void UpdateSpawner()
