@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp::PlanetProblem
   speed: 0
-  prefab: {fileID: 0}
+  prefab: {fileID: 1616713827134691848, guid: 798cde18f7359c04fa32b1c1efd65481, type: 3}
   color: {r: 0, g: 0, b: 0, a: 0}
   problemType: 0
   problemRarity: 0
