@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grabbable : MonoBehaviour
 {
     public PlanetController m_planetController;
-    public ShipController m_ship;
+    public ProblemBase m_problemController;
     public Rigidbody m_rigidBody;
     public bool m_isGrabbed = false;
 
@@ -15,20 +15,20 @@ public class Grabbable : MonoBehaviour
     void Start()
     {
         //Temp
-        m_ship.m_speed = 0;
+        //m_ship.m_speed = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!m_isGrabbed && m_caressedByGrubbyHands && (Input.GetMouseButton(0) || m_planetController.m_grabWithoutClick) && m_planetController.m_holdingSomething)
+        if (!m_isGrabbed && m_caressedByGrubbyHands && (Input.GetMouseButton(0)) && !m_planetController.m_holdingSomething)
         {
             m_isGrabbed = true;
-            m_planetController.m_holdingSomething = true;
+            m_planetController.Grab(gameObject);
         }
         else if (m_isGrabbed)
         {
-            if (Input.GetMouseButtonUp(0) || (m_planetController.m_grabWithoutClick && m_planetController.CheckForFlick()))
+            if (Input.GetMouseButtonUp(0))
             {
                 ReleaseMeFilthyHands();
             }
@@ -41,7 +41,7 @@ public class Grabbable : MonoBehaviour
 
     private void ReleaseMeFilthyHands()
     {
-        m_planetController.m_holdingSomething = false;
+        m_planetController.Release();
         m_isGrabbed = false;
         m_rigidBody.isKinematic = false;
         m_rigidBody.velocity = m_planetController.GetHandVelocity();
@@ -53,9 +53,9 @@ public class Grabbable : MonoBehaviour
 
     private void CarryMeFiltyHands()
     {
-        transform.position = m_planetController.GetHandPosition();
+        //transform.position = m_planetController.GetHandPosition();
         m_rigidBody.velocity = m_planetController.GetHandVelocity();
-        m_rigidBody.isKinematic = true;
+        //m_rigidBody.isKinematic = true;
         //m_rigidBody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
@@ -64,7 +64,6 @@ public class Grabbable : MonoBehaviour
         if (other.tag.Equals("Hand"))
         {
             m_caressedByGrubbyHands = true;
-            Debug.Log("EEEEK");
         }
     }
 
@@ -73,7 +72,6 @@ public class Grabbable : MonoBehaviour
         if (other.tag.Equals("Hand"))
         {
             m_caressedByGrubbyHands = false;
-            Debug.Log("PHEW");
         }
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: ProblemAsteroid
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetProblem
+  speed: 0
+  prefab: {fileID: 1082903435403936, guid: 53f45aab05a982b4284b45ec719295a9, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  problemType: 2
+  problemRarity: 0
+  behaviorScript: {fileID: 0}

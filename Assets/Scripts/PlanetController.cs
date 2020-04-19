@@ -98,9 +98,16 @@ public class PlanetController : MonoBehaviour
         return m_myHands.GetVelocity();
     }
 
-    public bool CheckForFlick()
+    public void Grab(GameObject grabbedThing)
     {
-        return m_myHands.HandleFlick();
+        m_holdingSomething = true;
+        m_myHands.Attach(grabbedThing);
+    }
+
+    public void Release()
+    {
+        m_holdingSomething = false;
+        m_myHands.Release();
     }
 
     private void OnDrawGizmos()

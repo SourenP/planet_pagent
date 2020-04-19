@@ -5,6 +5,9 @@ using UnityEngine;
 public class Hands : MonoBehaviour
 {
     public PlanetArms m_planetArms;
+    public FixedJoint m_joint;
+
+    public Rigidbody m_rigidBody;
 
     private List<Vector3> m_mouseBuffer;
     private Vector3 m_mouseVelocity;
@@ -44,12 +47,17 @@ public class Hands : MonoBehaviour
         //m_mouseVelocity = Camera.main.ScreenToWorldPoint(Input.mousePosition) - m_lastMousePosition;
         m_lastMousePosition = mousePosition;
         m_mouseVelocity.z = 0;
-        Debug.Log(m_mouseVelocity);
+        m_rigidBody.velocity = m_mouseVelocity;
+    }
+    
+    public void Attach(GameObject other)
+    {
+        m_joint.connectedBody = other.GetComponent<Rigidbody>();
     }
 
-    public bool HandleFlick()
+    public void Release()
     {
-        return false;
+        m_joint.connectedBody = null;
     }
 
     public Vector3 GetVelocity()

@@ -69,8 +69,8 @@ public class PlanetArms : MonoBehaviour
             armEnd = armStart + (armDirection * maxArmLength);
         }
 
-        armStart.z = 0;
-        armEnd.z = 0;
+        armStart.z = 1;
+        armEnd.z = 1;
 
         arm.start = armStart;
         arm.end = armEnd;

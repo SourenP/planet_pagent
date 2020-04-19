@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 114229361784660836}
   - component: {fileID: 64575628540571908}
   - component: {fileID: 54270365246137156}
+  - component: {fileID: 1180242892}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: SpaceBody
@@ -65,25 +66,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5981ca08ce617434b9a3cceb5d480437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_gameHandler: {fileID: 0}
+  m_planetController: {fileID: 0}
   m_polyGen: {fileID: 114372734114821606}
-  m_gravityController: {fileID: 0}
-  m_linearSpeed: 0.3
-  m_angularSpeed: 0
-  m_absorbedCount: 0
-  m_sharpTurnThresholdAngle: 60
-  m_sharpTurnSpeedModifier: 0.3
-  m_pullMassThreshold: 0.7
-  m_absorbMassThreshold: 0.2
-  m_rigidBody: {fileID: 54270365246137156}
-  m_forceMode: 1
-  m_mass: 0.1
-  m_attached: 0
-  m_absorbedParticleEffect: {fileID: 1706969793557724, guid: 640f116f24e788d4485a6e9063982fa0,
-    type: 3}
-  m_beingPulled: 0
-  m_health: 1
-  m_attacking: 0
-  m_wasHurt: 0
+  m_radius: 0.1
 --- !u!64 &64575628540571908
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -110,10 +96,26 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
+--- !u!114 &1180242892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082903435403936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2b65231dd77034fb7d178a12e2abe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_planetController: {fileID: 0}
+  m_problemController: {fileID: 114229361784660836}
+  m_rigidBody: {fileID: 54270365246137156}
+  m_isGrabbed: 0
 --- !u!1 &1478728321617506
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
-
-public class ShipController : MonoBehaviour
+public class ShipController : ProblemBase
 {
     public PlanetController m_planet;
 
@@ -92,11 +90,12 @@ public class ShipController : MonoBehaviour
     {
     }
 
-    public void Init()
+    public override void Init(GameHandler gameHandler, PlanetController planet)
     {
+        base.Init(gameHandler, planet);
         //m_direction = getShipDirection(m_planet.m_angle, m_planet.m_speed, m_planet.m_width, m_planet.m_height, new Vector2(transform.position.x, transform.position.y), m_speed);
         //transform.forward = new Vector3(m_direction.x, 0, m_direction.y);
-        GetComponent<Grabbable>().m_planetController = m_planet;
+
     }
 
     // Update is called once per frame

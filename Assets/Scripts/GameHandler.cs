@@ -49,8 +49,7 @@ public class GameHandler : MonoBehaviour
         {
             GameObject ship = Instantiate(m_shipPrefab);
             ship.transform.position = m_orbitalProblemSpawner.transform.position;
-            ship.GetComponent<ShipController>().m_planet = m_planet;
-            ship.GetComponent<ShipController>().Init();
+            ship.GetComponent<ShipController>().Init(this, m_planet);
         }
         StartCoroutine(MaybeSpawnAProblem());
     }
@@ -61,12 +60,18 @@ public class GameHandler : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(1))
         {
-            GameObject ship = Instantiate(m_shipPrefab);
+            //GameObject ship = Instantiate(m_shipPrefab);
+            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //mousePos.z = m_planet.transform.position.z;
+            //ship.transform.position = mousePos; 
+            //ship.GetComponent<ShipController>().m_planet = m_planet;
+            //ship.GetComponent<ShipController>().Init(this);
+
+            GameObject ship = Instantiate(m_asteroidPrefab);
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            ship.transform.position = mousePos; 
-            ship.GetComponent<ShipController>().m_planet = m_planet;
-            ship.GetComponent<ShipController>().Init();
+            mousePos.z = m_planet.transform.position.z;
+            ship.transform.position = mousePos;
+            ship.GetComponent<ProblemBase>().Init(this, m_planet);
 
         }
     }
@@ -80,11 +85,6 @@ public class GameHandler : MonoBehaviour
             GameObject ast = Instantiate(m_asteroidPrefab);
             AsteroidController astCont = ast.GetComponent<AsteroidController>();
 
-            Vector3 pos = new Vector3(Mathf.Cos(angle * i) * target.m_mass, Mathf.Sin(angle * i) * target.m_mass, 0);
-
-            pos = target.transform.TransformPoint(pos);
-
-            astCont.Init(pos, target.m_mass/(count * 10f), this, AsteroidController.AstroidType.Hostile);
 
             Rigidbody rb = ast.GetComponent<Rigidbody>();
 
@@ -109,8 +109,6 @@ public class GameHandler : MonoBehaviour
     public void RandomizeAsteroid(AsteroidController ast)
     {
         float mass = 0.2f;
-        AsteroidController.AstroidType astType;
-        
 
         float camHeight = m_camera.orthographicSize;
         float camWidth = camHeight * 16 / 9;
@@ -159,7 +157,6 @@ public class GameHandler : MonoBehaviour
 
 
         Debug.Log(mass);
-        ast.Init(new Vector3(posX, posY, 0), mass, this, 0);        
 
     }
     private void OnDrawGizmos()
