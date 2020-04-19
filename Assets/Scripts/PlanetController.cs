@@ -20,6 +20,8 @@ public class PlanetController : MonoBehaviour
 
     public bool m_clockwise;
 
+    public int humanCount = 0;
+
     Vector3 m_center;
     Vector3 m_direction;
     Vector3 m_position;
@@ -56,6 +58,9 @@ public class PlanetController : MonoBehaviour
         
         m_position = NextPosition3d(m_angle);
         this.gameObject.transform.position = m_position;
+
+        // test
+        humanCount += 1;
 
         UpdateSpawner();
     }

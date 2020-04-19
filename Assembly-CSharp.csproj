@@ -46,6 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Hands.cs" />
+     <Compile Include="Assets\HumanCounter.cs" />
      <Compile Include="Assets\Scripts\ArmLine.cs" />
      <Compile Include="Assets\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Scripts\BackgroundHandler.cs" />
