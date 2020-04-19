@@ -11,26 +11,67 @@ public class ArmLine : MonoBehaviour
     public double angleOffset {set; get;}
     public float maxArmLength {set; get;}
 
+    public GameObject openGlovePrefab;
+    public GameObject closedGlovePrefab;
+
+    GameObject openGlove;
+    GameObject closedGlove;
+
+    Transform openGloveTransform;
+    Transform closedGloveTransform;
+
+    SpriteRenderer openGloveSpriteRenderer;
+    SpriteRenderer closedGloveSpriteRenderer;
+
     void Awake() {
         lineRenderer = gameObject.GetComponent<LineRenderer>();
+        openGlove = Instantiate(openGlovePrefab);
+        closedGlove = Instantiate(closedGlovePrefab);
+        openGloveTransform = openGlove.GetComponent<Transform>();
+        closedGloveTransform = closedGlove.GetComponent<Transform>();
+        openGloveTransform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        closedGloveTransform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        openGloveSpriteRenderer = openGlove.GetComponent<SpriteRenderer>(); 
+        closedGloveSpriteRenderer = closedGlove.GetComponent<SpriteRenderer>(); 
+
+        closedGloveSpriteRenderer.enabled = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if(Input.GetMouseButtonDown(0)){
+            closedGloveSpriteRenderer.enabled = true;
+            openGloveSpriteRenderer.enabled = false;
+        } else if (Input.GetMouseButtonUp(0)) {
+            closedGloveSpriteRenderer.enabled = false;
+            openGloveSpriteRenderer.enabled = true;
+        }
+
         // lineRenderer.SetPosition(0, start);
         // lineRenderer.SetPosition(1, end);
         Debug.Log(maxArmLength);
-        drawArmParabola(start, end, angleOffset != 0, maxArmLength);
+        Vector3 pointingDir = drawArmParabola(start, end, angleOffset != 0, maxArmLength);
+        pointingDir.z = 0;
+        openGloveTransform.position = end;
+        openGloveTransform.rotation =  Quaternion.LookRotation(
+            forward: Vector3.forward,
+            upwards: pointingDir
+        );
+        closedGloveTransform.position = end;
+        closedGloveTransform.rotation =  Quaternion.LookRotation(
+            forward: Vector3.forward,
+            upwards: pointingDir
+        );
     }
 
-    void drawArmParabola(
+    // returns direction the parabola/line end is facing
+    Vector3 drawArmParabola(
             Vector3 begin, 
             Vector3 end, 
             bool isLeftArm,
@@ -44,7 +85,7 @@ public class ArmLine : MonoBehaviour
             points[0] = begin;
             points[1] = end;
             lineRenderer.SetPositions(points);
-            Debug.Log("here");
+            return (points[1] - points[0]).normalized;
         } else {
             // Reference frame vectors
             Vector3 vx = rel.normalized;
@@ -74,6 +115,8 @@ public class ArmLine : MonoBehaviour
 
             lineRenderer.positionCount = n_lineSegments + 1;
             lineRenderer.SetPositions(points);
+
+            return (points[n_lineSegments] - points[n_lineSegments-1]).normalized;
         }
     }
 }

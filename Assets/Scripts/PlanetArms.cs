@@ -20,9 +20,6 @@ public class PlanetArms : MonoBehaviour
     ArmLine leftArm;
     ArmLine rightArm; 
 
-    // Debug point
-    Transform pointTransform;
-
     void Awake() {
         Renderer renderer = gameObject.GetComponent<Renderer>(); // not sure if this will scale properly
         sphereRadius = renderer.bounds.extents.x;
@@ -41,7 +38,6 @@ public class PlanetArms : MonoBehaviour
         rightArmLineRenderer.endWidth = armWidth;
         rightArm.angleOffset = 0;
         rightArm.maxArmLength = maxArmLength;
-
     }
 
     // Start is called before the first frame update

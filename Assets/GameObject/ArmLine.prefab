@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4319cb3f12a49ec448ceb80c9a7d7e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openGlovePrefab: {fileID: 5393375894825292139, guid: 0f6406e37a1a98e4a8ddc50b91424da6,
+    type: 3}
+  closedGlovePrefab: {fileID: 8478675355868268631, guid: 419bb37389b68604984921599a70e171,
+    type: 3}
 --- !u!120 &-414961012304073389
 LineRenderer:
   m_ObjectHideFlags: 0
