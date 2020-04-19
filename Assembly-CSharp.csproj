@@ -62,12 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Hands.cs" />
     <Compile Include="Assets\Scripts\ArmLine.cs" />
     <Compile Include="Assets\Scripts\AsteroidController.cs" />
     <Compile Include="Assets\Scripts\BackgroundHandler.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CameraTester.cs" />
     <Compile Include="Assets\Scripts\GameHandler.cs" />
+    <Compile Include="Assets\Scripts\Grabbable.cs" />
     <Compile Include="Assets\Scripts\GravityController.cs" />
     <Compile Include="Assets\Scripts\PlanetArms.cs" />
     <Compile Include="Assets\Scripts\PlanetController.cs" />

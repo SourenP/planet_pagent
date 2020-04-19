@@ -107,4 +107,11 @@ public class PlanetArms : MonoBehaviour
         //Debug.Log("rad " + rad);
         return rad;
     }
+
+    public Vector3 GetMidPointOfHands()
+    {
+        Vector3 midPoint = leftArm.end - (leftArm.end - rightArm.end)/2;
+
+        return midPoint;
+    }
 }

@@ -37,7 +37,7 @@ public class GameHandler : MonoBehaviour
         m_backgroundHandler.Init();
         m_planet.Init();
 
-        StartCoroutine(MaybeSpawnAProblem());
+        //StartCoroutine(MaybeSpawnAProblem());
     }
 
     IEnumerator MaybeSpawnAProblem()
@@ -176,6 +176,6 @@ public class GameHandler : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(camPos, spawnAreaOuterTR - spawnAreaOuterBL);
 
-        Gizmos.DrawSphere(m_orbitalProblemSpawner.transform.position, 0.5f);
+        //Gizmos.DrawSphere(m_orbitalProblemSpawner.transform.position, 0.5f);
     }
 }

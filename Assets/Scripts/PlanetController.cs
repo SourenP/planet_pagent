@@ -15,6 +15,8 @@ public class PlanetController : MonoBehaviour
     public float m_spawnerRearAngle;
     public float m_spawnerSpeed;
 
+    public Hands m_myHands;
+
     public bool m_clockwise;
 
     Vector3 m_center;
@@ -83,8 +85,19 @@ public class PlanetController : MonoBehaviour
         m_problemSpawner.transform.position = spawnerVec;
     }
 
+    public Vector3 GetHandPosition()
+    {
+        return m_myHands.transform.position;
+    }
+
+    public Vector3 GetHandVelocity()
+    {
+        return m_myHands.GetVelocity();
+    }
+
     private void OnDrawGizmos()
     {
+        return;
         Vector3 spawnerVec = m_problemSpawner.transform.position - m_position;
         Vector3 sunToPlanet = m_position - m_center;
 
