@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class SunController : MonoBehaviour
 {
-    public ParticleSystem m_explosionParticleSystem;
-    public ParticleSystem m_debrisParticleSystem;
-
-    public GameObject m_sunParticleSystem;
+    public GameObject m_explosionPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +22,12 @@ public class SunController : MonoBehaviour
     {
         Destroy(collision.transform.gameObject);
 
-        m_sunParticleSystem.transform.position = collision.contacts[0].point;
-        float angle = Vector3.Angle(new Vector3(1f, 0f, 0f), m_sunParticleSystem.transform.position - transform.position);
-        m_sunParticleSystem.transform.rotation = Quaternion.Euler(angle, 90, 0);
 
-        m_explosionParticleSystem.Play();
-        m_debrisParticleSystem.Play();
+        GameObject explosion = Instantiate(m_explosionPrefab);
+        Transform explosionTransform = explosion.GetComponent<Transform>();
+        explosionTransform.position = collision.contacts[0].point;
+        Animator explosionAnimation = explosion.GetComponent<Animator>();
+        float explosionAnimationLength = explosionAnimation.GetCurrentAnimatorStateInfo(0).length;
+        Destroy(explosion, explosionAnimationLength);
     }
 }
