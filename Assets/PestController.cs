@@ -223,7 +223,7 @@ public class PestController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag.Equals("PlanetSurface") && !m_collidedWithPlanet)
+        if(other.tag.Equals("PlanetSurface") && !m_collidedWithPlanet && !m_onPlanet)
         {
             m_collidedWithPlanet = true;
             m_planet.AddPest();

@@ -51,7 +51,11 @@ public class GameHandler : MonoBehaviour
     public Camera m_camera;
     public float m_cameraSizeStart = 1f;
     public float m_cameraSizeMax = 10f;
-    
+
+    public float m_defaultSpawnTime = 3f;
+    public float m_spawnTimeMin = 1.5f;
+    public float m_spawnModifier = 0.1f;
+    public float m_spawnTime;
     public float m_asteroidDespawnBuffer = 3;
 
     public float m_astroidCount = 10f;
@@ -76,6 +80,7 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_spawnTime = m_defaultSpawnTime;
         m_astroidTexture = m_textureGenerator.GenerateTexture(256, 256, 100f);
 
         m_backgroundHandler.Init();
@@ -90,10 +95,10 @@ public class GameHandler : MonoBehaviour
 
     IEnumerator MaybeSpawnAProblem()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(m_spawnTime);
         if (m_gameStarted)
         {
-            float[] weights = { 1.0f, 0.5f, 0.5f };
+            float[] weights = { .5f, 0.75f, 0.75f };
             int type = UnityTemplateProjects.MyRandom.selectFromWeights(weights);
 
             if (type == (int)PlanetProblem.ProblemType.Asteroid)
@@ -138,6 +143,8 @@ public class GameHandler : MonoBehaviour
             m_astroidSpawnerInner.transform.position = position - idontcareanymore;
             m_astroidSpawnerOuter.transform.position = position + idontcareanymore;
         }
+        m_spawnTime = m_defaultSpawnTime - (Time.time * m_spawnModifier);
+        m_spawnTime = Mathf.Clamp(m_spawnTime, m_spawnTimeMin, m_defaultSpawnTime);
     }
 
     public void StartGame()

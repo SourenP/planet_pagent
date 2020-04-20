@@ -31,6 +31,9 @@ public class ShipController : ProblemBase
     public Vector3 explosionScale = new Vector3(0.2f, 0.2f, 0f);
 
 
+    public float m_shipExplostionMod = 2f;
+    public float m_explosionTimerStart = -1f;
+    float m_explosionTimer = 0f;
 
     GameObject sfxController;
 
@@ -136,11 +139,13 @@ public class ShipController : ProblemBase
         {
             m_wreckingShip = Instantiate(m_wreckingShipPrefab, m_transform);
             m_wreckingShip.GetComponent<Transform>().localScale = spriteScale;
+            m_renderer = m_wreckingShip.GetComponent<SpriteRenderer>();
         }
         else
         {
             m_bombShip = Instantiate(m_bombShipPrefab, m_transform);
             m_bombShip.GetComponent<Transform>().localScale = spriteScale;
+            m_renderer = m_bombShip.GetComponent<SpriteRenderer>();
         }
 
 
@@ -171,6 +176,19 @@ public class ShipController : ProblemBase
         //    m_speed
         //);
         transform.position += m_direction * m_speed * Time.deltaTime;
+        if (m_explosionTimerStart != -1)
+        {
+            float timeSinceExplosionStart = Time.time - m_explosionTimerStart;
+            float fraction = timeSinceExplosionStart / m_explosionTimer;
+            float modifier = fraction * m_shipExplostionMod;
+
+            Color color = m_renderer.color;
+
+            color.r = 1-fraction;
+            color.g = 1-fraction;
+            color.b = 1-fraction;
+            m_renderer.color = color;
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -199,6 +217,10 @@ public class ShipController : ProblemBase
         float explosionTime = m_selfDestructDelay;
         if (!timedOut)
             explosionTime = m_bombShipDelay;
+
+
+        m_explosionTimer = explosionTime;
+        m_explosionTimerStart = Time.time;
 
         StartCoroutine(ReleaseTimer(explosionTime - m_pestReleaseDelay));
         StartCoroutine(SelfDestructTimer(explosionTime));

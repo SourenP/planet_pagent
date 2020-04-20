@@ -822,6 +822,16 @@ PrefabInstance:
       propertyPath: m_gameOver
       value: 
       objectReference: {fileID: 1734593093}
+    - target: {fileID: 6204583153936912940, guid: 75585985ad8faf64291de58581e1160f,
+        type: 3}
+      propertyPath: m_spawnModifier
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204583153936912940, guid: 75585985ad8faf64291de58581e1160f,
+        type: 3}
+      propertyPath: m_spawnTimeMin
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6204583153936912941, guid: 75585985ad8faf64291de58581e1160f,
         type: 3}
       propertyPath: m_Name
