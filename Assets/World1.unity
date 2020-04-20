@@ -298,6 +298,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 6401072436286367930, guid: 85a54eaef95141a4c8b6c1d20964720a,
+        type: 3}
+      propertyPath: m_speed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6401072436286367931, guid: 85a54eaef95141a4c8b6c1d20964720a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -355,6 +360,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85a54eaef95141a4c8b6c1d20964720a, type: 3}
+--- !u!1 &1050466283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1794009915108403176, guid: f35e998a2f030d344b785ce471d98f70,
+    type: 3}
+  m_PrefabInstance: {fileID: 7988843008556287298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1050466288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050466283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 963e625d75a89dd4185d8bd19a0df26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facePrefab: {fileID: 6787654743280803369, guid: f9b990b64f60024408fe9207dea0cb4a,
+    type: 3}
+  spriteScale: {x: 0.6, y: 0.6, z: 1}
+--- !u!1 &1126328513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6401072436286367927, guid: 85a54eaef95141a4c8b6c1d20964720a,
+    type: 3}
+  m_PrefabInstance: {fileID: 714330994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1126328516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126328513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 963e625d75a89dd4185d8bd19a0df26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facePrefab: {fileID: 3439879062450156630, guid: 130e056b695a464429dbb866c8a04065,
+    type: 3}
+  spriteScale: {x: 0.6, y: 0.6, z: 0.1}
 --- !u!1001 &1180242888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -715,7 +762,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 714330994}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1126328513}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c42e42d9dd9c2bc47a87a008a57ece80, type: 3}
