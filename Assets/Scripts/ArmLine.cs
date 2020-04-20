@@ -93,13 +93,6 @@ public class ArmLine : MonoBehaviour
         Vector3 rel = end - begin;
         float relMagnitude = rel.magnitude;
 
-        if (relMagnitude > maxArmLength) {
-            Vector3[] points = new Vector3[2];
-            points[0] = begin;
-            points[1] = end;
-            lineRenderer.SetPositions(points);
-            return (points[1] - points[0]).normalized;
-        } else {
             // Reference frame vectors
             Vector3 vx = rel.normalized;
             Vector3 vz = new Vector3(0.0f, 0.0f, 1.0f); // this should point towards the camera, not sure if I've done that
@@ -109,11 +102,16 @@ public class ArmLine : MonoBehaviour
             } else {
                 vy = - Vector3.Cross(vx, vz);
             }
-            
+
             // Modelling the arm as two equal-length line segments joined by a hinge
             // Line segment span (in the reference frame)
             float dx = 0.5f * rel.magnitude;
-            float dy = 0.5f * Mathf.Sqrt(maxArmLength*maxArmLength - relMagnitude*relMagnitude);
+            float dy;
+            if (relMagnitude < maxArmLength) {
+                dy = 0.5f * Mathf.Sqrt(maxArmLength*maxArmLength - relMagnitude*relMagnitude);
+            } else {
+                dy = 0.0f;
+            }
             float a = dy / (dx*dx); // coefficient of x^2
 
             int n_lineSegments = 16;
@@ -130,6 +128,5 @@ public class ArmLine : MonoBehaviour
             lineRenderer.SetPositions(points);
 
             return (points[n_lineSegments] - points[n_lineSegments-1]).normalized;
-        }
     }
 }
