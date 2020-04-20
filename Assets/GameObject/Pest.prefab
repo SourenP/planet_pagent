@@ -100,7 +100,8 @@ MonoBehaviour:
   m_planet: {fileID: 0}
   m_rigidBody: {fileID: -6847675842237774089}
   m_moveSpeed: 10
-  m_diveBombSpeed: 0.1
+  m_diveBombSpeed: 1
+  m_divePositionAngularDeviation: 15
   m_color: {r: 0, g: 0, b: 0, a: 0}
   m_spriteChangeTimer: 6
   m_spriteRenderer: {fileID: 6459943241968100791}

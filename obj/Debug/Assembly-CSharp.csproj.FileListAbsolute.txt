@@ -251,9 +251,6 @@ C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.2D.Tilemap.Editor.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.DataPrivacy.dll
-C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.Editor.dll
-C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.StandardEvents.dll
-C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.Tracker.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.CollabProxy.Editor.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Postprocessing.Editor.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Postprocessing.Runtime.dll
@@ -303,3 +300,6 @@ C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.iOS.Extensions.Common.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.TestRunner.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEngine.TestRunner.pdb
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.Editor.dll
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.StandardEvents.dll
+C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.Tracker.dll

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Hands : MonoBehaviour
 {
+    public PlanetController m_planet;
     public PlanetArms m_planetArms;
     public FixedJoint m_joint;
-
     public Rigidbody m_rigidBody;
 
     private List<Vector3> m_mouseBuffer;
@@ -27,6 +27,11 @@ public class Hands : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(m_joint.connectedBody == null)
+        {
+            m_planet.Release();
+        }
+
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         transform.position = m_planetArms.GetMidPointOfHands();
@@ -52,6 +57,7 @@ public class Hands : MonoBehaviour
     
     public void Attach(GameObject other)
     {
+        other.transform.position = this.transform.position;
         m_joint.connectedBody = other.GetComponent<Rigidbody>();
     }
 

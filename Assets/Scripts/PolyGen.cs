@@ -7,9 +7,6 @@ public class PolyGen : MonoBehaviour
     //
     public MeshRenderer m_meshRenderer;
     public MeshFilter m_meshFilter;
-
-    public MeshCollider m_meshCollider;
-
     public float m_randomMin = 0.3f;
     public float m_randomMax = 1.0f;
 
@@ -92,7 +89,6 @@ public class PolyGen : MonoBehaviour
         m_mesh.SetVertices(m_verts);
         m_mesh.SetTriangles(tris, 0);
         //m_mesh.SetUVs(0, uvs);
-        m_meshCollider.sharedMesh = m_mesh;
     }
 
     public void ExtendNearestPoints(Vector3 point, Vector3 extDir, int extendCount, float extendAmount)
@@ -159,7 +155,6 @@ public class PolyGen : MonoBehaviour
 
 
         m_mesh.SetVertices(m_verts);
-        m_meshCollider.sharedMesh = m_mesh;
     }
 
     public void SetTexture(Texture2D texture)
