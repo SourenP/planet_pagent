@@ -6,6 +6,8 @@ public class PestController : MonoBehaviour
 {
     public bool m_onPlanet;
 
+    bool m_infest;
+
     public PlanetController m_planet;
     public Rigidbody m_rigidBody;
     
@@ -32,15 +34,15 @@ public class PestController : MonoBehaviour
 
     }
 
-    public void Init(bool onPlanet, PlanetController planetController)
+    public void Init(bool onPlanet, PlanetController planetController, bool infestation = false)
     {
         m_planet = planetController;
         m_onPlanet = onPlanet;
-        
+        m_infest = infestation;
         if (m_onPlanet)
         {
             m_angleOnPlanet = m_planet.GetPestSlot();
-
+            GetComponent<BoxCollider>().isTrigger = true;
             RandomizeMe();
         }
         else
@@ -155,7 +157,8 @@ public class PestController : MonoBehaviour
     {
         if(m_onPlanet)
         {
-            MoveOnPlanet();
+            if(!m_infest)
+                MoveOnPlanet();
         }
         else
         {

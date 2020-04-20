@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlanetController : MonoBehaviour
 {
+    public GameHandler m_gameHandler;
     public GameObject m_sun;
     public float m_height;
     public float m_width;
@@ -17,6 +18,7 @@ public class PlanetController : MonoBehaviour
 
     public bool m_grabWithoutClick = false;
     public Hands m_myHands;
+    public PlanetArms m_arms;
     public GameObject m_mesh;
     public float m_meshRotationSpeed;
 
@@ -36,7 +38,7 @@ public class PlanetController : MonoBehaviour
     public GameObject m_pestPrefab;
 
     List<float> m_pestAngles;
-    Queue<int> m_availableSlots;
+    public Queue<int> m_availableSlots;
     public int m_pestCount;
 
     // Start is called before the first frame update
@@ -62,7 +64,6 @@ public class PlanetController : MonoBehaviour
     private void Start()
     {
         SetupPestSlots();
-
         //for(int i = 0; i < m_pestAngles.Count; ++i)
         //{
         //    GameObject pest = Instantiate(m_pestPrefab);
@@ -75,6 +76,36 @@ public class PlanetController : MonoBehaviour
         GameObject pest = Instantiate(m_pestPrefab);
         pest.GetComponent<PestController>().Init(true, this);
     }
+
+    public int m_infestaitonCount = 200;
+    public float m_infestInterval = 0.01f;
+    float m_infestCount = 0;
+    public void Infest()
+    {
+        m_arms.Dead();
+        StartCoroutine(SpawnInfester());
+
+    }
+
+    IEnumerator SpawnInfester()
+    {
+        yield return new WaitForSeconds(m_infestInterval);
+        ++m_infestCount;
+       
+
+        GameObject pest = Instantiate(m_pestPrefab, this.transform);
+        pest.transform.localScale = new Vector3(2, 2, 0);
+        pest.GetComponent<PestController>().Init(true, this, true);
+        float pestAngle = Random.Range(0, 360);
+        float pestRadius = Random.Range(0, GetRadius() * 3);
+
+        pest.transform.localPosition = new Vector3(Mathf.Cos(pestAngle) * pestRadius, Mathf.Sin(pestAngle) * pestRadius, -3);
+
+        if (m_infestCount < m_infestaitonCount)
+            StartCoroutine(SpawnInfester());
+
+    }
+
     void SetupPestSlots()
     {
         float spriteLeft = m_pestPrefab.GetComponent<SpriteRenderer>().sprite.bounds.min.x * m_pestPrefab.transform.localScale.x;
@@ -117,7 +148,7 @@ public class PlanetController : MonoBehaviour
         ++m_pestCount;
         if (m_availableSlots.Count == 0)
         {
-            Debug.Log("You Lose");
+            m_gameHandler.EndGame();
             return 0;
         }
 

@@ -43,6 +43,12 @@ public class PlanetArms : MonoBehaviour
     void Start() {
     }
 
+    bool m_dead = false;
+    public void Dead()
+    {
+        m_dead = true;
+    }
+
     // Update is called once per frame
     void Update() {
         double mouseAngle = GetMouseAngle();
@@ -97,6 +103,12 @@ public class PlanetArms : MonoBehaviour
 
     // Returns mouse position relative to point
     Vector3 GetMousePosition(Vector3 point) {
+        if(m_dead)
+        {
+
+            return transform.position - Vector3.up * 2;
+        }
+
         float distanceToPlayer = - Camera.main.transform.position.z + sphereTransform.position.z;
         Vector3 cameraPoint = Input.mousePosition;
         cameraPoint.z = distanceToPlayer;

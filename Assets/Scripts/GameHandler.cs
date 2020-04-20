@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityTemplateProjects
 {
@@ -45,6 +46,8 @@ namespace UnityTemplateProjects
 
 public class GameHandler : MonoBehaviour
 {
+    public Text m_gameOver;
+
     public Camera m_camera;
     public float m_cameraSizeStart = 1f;
     public float m_cameraSizeMax = 10f;
@@ -68,6 +71,8 @@ public class GameHandler : MonoBehaviour
     public TextureGenerator m_textureGenerator;
     Texture2D m_astroidTexture;
 
+    bool m_gameStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,16 +91,19 @@ public class GameHandler : MonoBehaviour
     IEnumerator MaybeSpawnAProblem()
     {
         yield return new WaitForSeconds(4);
-        float[] weights = { 1.0f, 0.5f, 0.5f };
-        int type = UnityTemplateProjects.MyRandom.selectFromWeights(weights);
+        if (m_gameStarted)
+        {
+            float[] weights = { 1.0f, 0.5f, 0.5f };
+            int type = UnityTemplateProjects.MyRandom.selectFromWeights(weights);
 
-        if(type == (int)PlanetProblem.ProblemType.Asteroid)
-        {
-            SpawnAsteroid();
-        }
-        else
-        {
-            SpawnShip((PlanetProblem.ProblemType)type);
+            if (type == (int)PlanetProblem.ProblemType.Asteroid)
+            {
+                SpawnAsteroid();
+            }
+            else
+            {
+                SpawnShip((PlanetProblem.ProblemType)type);
+            }
         }
 
         StartCoroutine(MaybeSpawnAProblem());
@@ -119,23 +127,6 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(1))
-        {
-            //GameObject ship = Instantiate(m_shipPrefab);
-            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //mousePos.z = m_planet.transform.position.z;
-            //ship.transform.position = mousePos; 
-            //ship.GetComponent<ShipController>().m_planet = m_planet;
-            //ship.GetComponent<ShipController>().Init(this);
-
-            GameObject ship = Instantiate(m_shipPrefab);
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = m_planet.transform.position.z;
-            ship.transform.position = mousePos;
-            ship.GetComponent<ProblemBase>().Init(this, m_planet, PlanetProblem.ProblemType.BombShip);
-
-        }
-
         {
             m_currentAstroidSpawnerAngle += m_planet.m_speed * Time.deltaTime;
             Vector3 position = m_planet.NextPosition3d(m_currentAstroidSpawnerAngle);
@@ -147,6 +138,27 @@ public class GameHandler : MonoBehaviour
             m_astroidSpawnerInner.transform.position = position - idontcareanymore;
             m_astroidSpawnerOuter.transform.position = position + idontcareanymore;
         }
+    }
+
+    public void StartGame()
+    {
+        Camera.main.transform.parent = m_planet.transform;
+        Camera.main.transform.localPosition = Vector3.zero + Vector3.forward * -5;
+        Camera.main.orthographicSize = 1;
+
+
+        m_gameStarted = true;
+    }
+
+    public void EndGame()
+    {
+        if (m_gameOver.gameObject.activeSelf)
+            return;
+
+        m_gameOver.enabled = true;
+        m_gameOver.gameObject.SetActive(true);
+        m_gameStarted = false;
+        m_planet.Infest();
     }
 
     public void Fracture(AsteroidController target)
