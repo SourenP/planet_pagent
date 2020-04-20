@@ -30,6 +30,11 @@ public class ShipController : ProblemBase
     public GameObject m_explosionPrefab;
     public Vector3 explosionScale = new Vector3(0.2f, 0.2f, 0f);
 
+
+
+    GameObject sfxController;
+
+
     Vector3 m_direction;
     Vector3 getShipDirection(
             float planet_angle,
@@ -137,6 +142,9 @@ public class ShipController : ProblemBase
             m_bombShip = Instantiate(m_bombShipPrefab, m_transform);
             m_bombShip.GetComponent<Transform>().localScale = spriteScale;
         }
+
+
+        sfxController =  GameObject.FindGameObjectWithTag("sfx");
     }
 
     public override void Init(GameHandler gameHandler, PlanetController planet, PlanetProblem.ProblemType type)
@@ -207,6 +215,7 @@ public class ShipController : ProblemBase
     {
         yield return new WaitForSeconds(waitTime);
 
+        sfxController.GetComponent<SFXController>().PlayShipExplosionSound();
         GameObject explosion = Instantiate(m_explosionPrefab);
         Transform explosionTransform = explosion.GetComponent<Transform>();
         explosionTransform.position = this.transform.position;

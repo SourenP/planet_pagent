@@ -50,6 +50,7 @@
      <Compile Include="Assets\PestController.cs" />
      <Compile Include="Assets\PlanetFace.cs" />
      <Compile Include="Assets\PlanetPrestCollider.cs" />
+     <Compile Include="Assets\SFXController.cs" />
      <Compile Include="Assets\Scripts\ArmLine.cs" />
      <Compile Include="Assets\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Scripts\BackgroundHandler.cs" />
