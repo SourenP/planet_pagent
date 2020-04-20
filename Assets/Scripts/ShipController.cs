@@ -27,6 +27,9 @@ public class ShipController : ProblemBase
     GameObject m_wreckingShip;
     GameObject m_bombShip;
 
+    public GameObject m_explosionPrefab;
+    public Vector3 explosionScale = new Vector3(0.2f, 0.2f, 0f);
+
     Vector3 m_direction;
     Vector3 getShipDirection(
             float planet_angle,
@@ -121,7 +124,6 @@ public class ShipController : ProblemBase
         //);
        // ReleasePests();
         Init(m_gameHandler, m_planet, m_problemType);
-        Debug.Log("direction " + m_direction);
 
         m_transform = GetComponent<Transform>(); 
 
@@ -205,6 +207,13 @@ public class ShipController : ProblemBase
     {
         yield return new WaitForSeconds(waitTime);
 
+        GameObject explosion = Instantiate(m_explosionPrefab);
+        Transform explosionTransform = explosion.GetComponent<Transform>();
+        explosionTransform.position = this.transform.position;
+        explosionTransform.localScale = explosionScale;
+        Animator explosionAnimation = explosion.GetComponent<Animator>();
+        float explosionAnimationLength = explosionAnimation.GetCurrentAnimatorStateInfo(0).length;
+        Destroy(explosion, explosionAnimationLength);
         Destroy(this.gameObject);
     }
 

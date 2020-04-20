@@ -66,6 +66,8 @@ MonoBehaviour:
     type: 3}
   m_bombShipPrefab: {fileID: 7935425628527903212, guid: 815b59e1822c3ac4cb5eb4c204b73717,
     type: 3}
+  m_explosionPrefab: {fileID: 7704901337697561473, guid: 6bea2ecd9a4f6504297d0fddb653c3a5,
+    type: 3}
 --- !u!54 &6952808637935936641
 Rigidbody:
   m_ObjectHideFlags: 0

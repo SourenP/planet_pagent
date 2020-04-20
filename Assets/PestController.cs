@@ -59,7 +59,6 @@ public class PestController : MonoBehaviour
             transform.up = m_direction;
 
             m_rigidBody.velocity = m_direction * m_diveBombSpeed;
-            Debug.Log(m_rigidBody.velocity);
         }
 
 
