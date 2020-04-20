@@ -15,7 +15,7 @@ MonoBehaviour:
   facePrefab: {fileID: 6787654743280803369, guid: f9b990b64f60024408fe9207dea0cb4a,
     type: 3}
   spriteScale: {x: 0.6, y: 0.6, z: 0.6}
-  spritePosition: {x: 0, y: 0, z: -1.5}
+  spritePosition: {x: 0, y: 0, z: -1}
 --- !u!1001 &7988843007832031905
 PrefabInstance:
   m_ObjectHideFlags: 0
