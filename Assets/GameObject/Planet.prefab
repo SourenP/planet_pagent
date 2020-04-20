@@ -319,7 +319,7 @@ MonoBehaviour:
   m_sun: {fileID: 0}
   m_height: 2
   m_width: 3
-  m_speed: 0
+  m_speed: 20
   m_problemSpawner: {fileID: 1027010838}
   m_spawnerRadius: 2
   m_spawnerFrontAngle: -30
@@ -328,6 +328,7 @@ MonoBehaviour:
   m_grabWithoutClick: 0
   m_myHands: {fileID: 1233080045}
   m_clockwise: 0
+  humanCount: 0
   m_angle: 0
   m_holdingSomething: 0
 --- !u!114 &133995966
@@ -344,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thresholdAngle: 30
   maxArmLength: 0.5
-  armWidth: 0.005
+  armWidth: 0.01
   leftArmOffsetAngle: 3.141592653589793
   armLinePrefab: {fileID: 4377819594604637603, guid: 9c003b9023464ba48bec0e822070a7e4,
     type: 3}
