@@ -248,9 +248,6 @@ C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.dll
 C:\Ludum\planet_pagent\obj\Debug\Assembly-CSharp.pdb
-C:\Ludum\planet_pagent\Temp\bin\Debug\com.unity.multiplayer-hlapi.Editor.dll
-C:\Ludum\planet_pagent\Temp\bin\Debug\com.unity.multiplayer-hlapi.Runtime.dll
-C:\Ludum\planet_pagent\Temp\bin\Debug\com.unity.multiplayer-weaver.Editor.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.2D.Tilemap.Editor.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.DataPrivacy.dll
@@ -282,7 +279,6 @@ C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.TestRunner.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEngine.TestRunner.dll
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Timeline.Editor.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEngine.Monetization.pdb
-C:\Ludum\planet_pagent\Temp\bin\Debug\com.unity.multiplayer-hlapi.Editor.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.ProGrids.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.VSCode.Editor.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEngine.Advertisements.pdb
@@ -292,7 +288,6 @@ C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEngine.UI.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Timeline.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.CollabProxy.Editor.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Postprocessing.Editor.pdb
-C:\Ludum\planet_pagent\Temp\bin\Debug\com.unity.multiplayer-weaver.Editor.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEngine.XR.LegacyInputHelpers.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Rider.Editor.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.2D.Sprite.Editor.pdb
@@ -304,7 +299,6 @@ C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.TextMeshPro.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\Unity.Analytics.DataPrivacy.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.XR.LegacyInputHelpers.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.UI.pdb
-C:\Ludum\planet_pagent\Temp\bin\Debug\com.unity.multiplayer-hlapi.Runtime.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.iOS.Extensions.Common.pdb
 C:\Ludum\planet_pagent\Temp\bin\Debug\UnityEditor.TestRunner.pdb

@@ -51,10 +51,11 @@ MonoBehaviour:
   m_astroidCount: 2
   m_asteroidPrefab: {fileID: 1082903435403936, guid: 53f45aab05a982b4284b45ec719295a9,
     type: 3}
+  m_shipPrefab: {fileID: 8508124564436854895, guid: e7962482bf3af2d42bdd3a0f4a416984,
+    type: 3}
   m_orbitalProblemSpawner: {fileID: 0}
   m_backgroundHandler: {fileID: 0}
   m_planet: {fileID: 0}
-  m_ship: {fileID: 0}
   m_textureGenerator: {fileID: 1412835387}
 --- !u!114 &1412835387
 MonoBehaviour:

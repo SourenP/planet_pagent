@@ -5,9 +5,19 @@ using UnityEngine;
 
 public class ShipController : ProblemBase
 {
-    public PlanetController m_planet;
-
+    public float m_selfDestructDelay = 5f;
+    public float m_bombShipDelay = 3f;
+    public float m_pestReleaseDelay = 1f;
+    public int m_pestCount = 10;
     public float m_speed = 0.2f;
+
+    public SpriteRenderer m_renderer;
+    public Sprite m_wreckingShipSprite;
+    public Sprite m_bombShipSprite;
+
+    public GameObject m_pestPrefab;
+    public float m_pestSpawnInterval = 0.1f;
+
     Vector3 m_direction;
     Vector3 getShipDirection(
             float planet_angle,
@@ -96,26 +106,36 @@ public class ShipController : ProblemBase
     // Start is called before the first frame update
     void Start()
     {
-        m_direction = getShipDirection(
-            m_planet.m_angle,
-            m_planet.m_speed,
-            new Vector2(transform.position.x, transform.position.y),
-            m_speed
-        );
+        //m_direction = getShipDirection(
+        //    m_planet.m_angle,
+        //    m_planet.m_speed,
+        //    new Vector2(transform.position.x, transform.position.y),
+        //    m_speed
+        //);
+        ReleasePests();
+        Init(m_gameHandler, m_planet, m_problemType);
         Debug.Log("direction " + m_direction);
     }
 
-    public override void Init(GameHandler gameHandler, PlanetController planet)
+    public override void Init(GameHandler gameHandler, PlanetController planet, PlanetProblem.ProblemType type)
     {
-        base.Init(gameHandler, planet);
-        m_direction = getShipDirection(
-            m_planet.m_angle,
-            m_planet.m_speed,
-            new Vector2(transform.position.x, transform.position.y),
-            m_speed
-        );
-        Debug.Log("direction " + m_direction);
+        base.Init(gameHandler, planet, type);
+        //m_direction = getShipDirection(
+        //    m_planet.m_angle,
+        //    m_planet.m_speed,
+        //    new Vector2(transform.position.x, transform.position.y),
+        //    m_speed
+        //);
         //transform.forward = new Vector3(m_direction.x, 0, m_direction.y);
+
+        if(m_problemType == PlanetProblem.ProblemType.WreckingShip)
+        {
+            m_renderer.sprite = m_wreckingShipSprite;
+        }
+        else
+        {
+            m_renderer.sprite = m_bombShipSprite;
+        }
 
     }
 
@@ -128,9 +148,66 @@ public class ShipController : ProblemBase
         //     new Vector2(transform.position.x, transform.position.y),
         //     m_speed
         // );
-        Debug.Log("position " + transform.position);
         transform.position += m_direction * m_speed * Time.deltaTime;
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (!other.tag.Equals("Player"))
+            return;
 
+        m_speed = 0;
+        gameObject.transform.parent = other.transform;
+    }
+
+    public override void Grabbed()
+    {
+        if(m_problemType == PlanetProblem.ProblemType.BombShip)
+        {
+            StartExplosionTimer(false);
+        }
+    }
+
+    public void StartExplosionTimer(bool timedOut)
+    {
+        float explosionTime = m_selfDestructDelay;
+        if (!timedOut)
+            explosionTime = m_bombShipDelay;
+
+        StartCoroutine(ReleaseTimer(explosionTime - m_pestReleaseDelay));
+        StartCoroutine(SelfDestructTimer(explosionTime));
+    }
+
+    IEnumerator ReleaseTimer(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        ReleasePests();
+    }
+
+    IEnumerator SelfDestructTimer(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        Destroy(this.gameObject);
+    }
+
+    public void ReleasePests()
+    {
+        StartCoroutine(SpawnPests());
+    }
+
+    IEnumerator SpawnPests()
+    {
+        yield return new WaitForSeconds(m_pestSpawnInterval);
+
+        --m_pestCount;
+        if(m_pestCount >= 0)
+        {
+            GameObject pest = Instantiate(m_pestPrefab);
+            pest.transform.position = transform.position;
+            pest.GetComponent<PestController>().Init(false, m_planet);
+            StartCoroutine(SpawnPests());
+        }
+    }
 }

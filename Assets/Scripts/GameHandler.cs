@@ -49,7 +49,7 @@ public class GameHandler : MonoBehaviour
         {
             GameObject ship = Instantiate(m_shipPrefab);
             ship.transform.position = m_orbitalProblemSpawner.transform.position;
-            ship.GetComponent<ShipController>().Init(this, m_planet);
+            ship.GetComponent<ShipController>().Init(this, m_planet, PlanetProblem.ProblemType.BombShip);
         }
         StartCoroutine(MaybeSpawnAProblem());
     }
@@ -67,11 +67,11 @@ public class GameHandler : MonoBehaviour
             //ship.GetComponent<ShipController>().m_planet = m_planet;
             //ship.GetComponent<ShipController>().Init(this);
 
-            GameObject ship = Instantiate(m_asteroidPrefab);
+            GameObject ship = Instantiate(m_shipPrefab);
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = m_planet.transform.position.z;
             ship.transform.position = mousePos;
-            ship.GetComponent<ProblemBase>().Init(this, m_planet);
+            ship.GetComponent<ProblemBase>().Init(this, m_planet, PlanetProblem.ProblemType.BombShip);
 
         }
     }

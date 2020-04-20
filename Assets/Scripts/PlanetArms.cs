@@ -9,7 +9,7 @@ public class PlanetArms : MonoBehaviour
     float sphereRadius;
     Transform sphereTransform;
     LineRenderer lineRenderer;
-
+    public Renderer renderer;
     public float thresholdAngle = 30;
     public float maxArmLength = 0.5f;
     public float armWidth = 0.1f;
@@ -21,7 +21,6 @@ public class PlanetArms : MonoBehaviour
     ArmLine rightArm; 
 
     void Awake() {
-        Renderer renderer = gameObject.GetComponent<Renderer>(); // not sure if this will scale properly
         sphereRadius = renderer.bounds.extents.x;
         sphereTransform = gameObject.GetComponent<Transform>();
 
@@ -92,7 +91,6 @@ public class PlanetArms : MonoBehaviour
     // Goes positive in the counterclockwise direction until PI and negative in clockwise until -PI
     double GetMouseAngle() {
         Vector3 mouseWorldPos = GetMousePosition(sphereTransform.position);
-        Debug.Log(mouseWorldPos);
         double angle =  Mathf.Atan2(mouseWorldPos.y, mouseWorldPos.x);
         return angle > 0 ? angle : ((2f * Math.PI) + angle);
     }

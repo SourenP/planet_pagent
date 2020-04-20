@@ -25,6 +25,7 @@ public class Grabbable : MonoBehaviour
         {
             m_isGrabbed = true;
             m_planetController.Grab(gameObject);
+            m_problemController.Grabbed();
         }
         else if (m_isGrabbed)
         {

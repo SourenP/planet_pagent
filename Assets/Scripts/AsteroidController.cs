@@ -5,7 +5,6 @@ using UnityEngine;
 public class AsteroidController : ProblemBase
 {
     public PolyGen m_polyGen;
-    private GameHandler m_gameHandler;
 
     public float m_radius = 0.1f;
 
@@ -15,9 +14,9 @@ public class AsteroidController : ProblemBase
     }
 
     
-    public override void Init(GameHandler handler, PlanetController planet)
+    public override void Init(GameHandler handler, PlanetController planet, PlanetProblem.ProblemType type)
     {
-        base.Init(handler, planet);
+        base.Init(handler, planet, type);
         m_polyGen.GenerateMesh(m_radius, 15);
         SetTexture(handler.m_textureGenerator.GenerateTexture(100, 100, 1));
         //m_isActive = true;

@@ -17,6 +17,8 @@ public class PlanetController : MonoBehaviour
 
     public bool m_grabWithoutClick = false;
     public Hands m_myHands;
+    public GameObject m_mesh;
+    public float m_meshRotationSpeed;
 
     public bool m_clockwise;
 
@@ -30,6 +32,12 @@ public class PlanetController : MonoBehaviour
     int m_spawnerDirection = 1; 
 
     public bool m_holdingSomething = false;
+
+    public GameObject m_pestPrefab;
+
+    List<float> m_pestAngles;
+    Queue<int> m_availableSlots;
+    public int m_pestCount;
 
     // Start is called before the first frame update
     public void Init()
@@ -51,6 +59,72 @@ public class PlanetController : MonoBehaviour
         m_problemSpawner.transform.position = spawnerVec;
     }
 
+    private void Start()
+    {
+        SetupPestSlots();
+
+        //for(int i = 0; i < m_pestAngles.Count; ++i)
+        //{
+        //    GameObject pest = Instantiate(m_pestPrefab);
+        //    pest.GetComponent<PestController>().Init(true, this);
+        //}
+    }
+     
+    public void AddPest()
+    {
+        GameObject pest = Instantiate(m_pestPrefab);
+        pest.GetComponent<PestController>().Init(true, this);
+    }
+    void SetupPestSlots()
+    {
+        float spriteLeft = m_pestPrefab.GetComponent<SpriteRenderer>().sprite.bounds.min.x * m_pestPrefab.transform.localScale.x;
+        float spriteRight = m_pestPrefab.GetComponent<SpriteRenderer>().sprite.bounds.max.x * m_pestPrefab.transform.localScale.x;
+
+        Vector3 rightVec = new Vector3(spriteRight, GetRadius(), 0);
+        Vector3 leftVec = new Vector3(spriteLeft, GetRadius(), 0);
+
+        float pestAngle = Vector3.Angle(leftVec, rightVec);
+
+        int maxPestCount = (int)Mathf.RoundToInt(360f / pestAngle);
+
+        m_pestAngles = new List<float>();
+        List<int> indexList = new List<int>();
+        for(int i = 0; i < maxPestCount; ++i)
+        {
+            m_pestAngles.Add(i * pestAngle);
+            indexList.Add(i);
+        }
+
+        int n = maxPestCount;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n);
+            int value = indexList[k];
+            indexList[k] = indexList[n];
+            indexList[n] = value;
+        }
+        m_availableSlots = new Queue<int>();
+        for(int i = 0; i < maxPestCount; ++i)
+        {
+            m_availableSlots.Enqueue(indexList[i]);
+        }
+
+    }
+
+    public float GetPestSlot()
+    {
+        ++m_pestCount;
+        if (m_availableSlots.Count == 0)
+        {
+            Debug.Log("You Lose");
+            return 0;
+        }
+
+        int slotIndex = m_availableSlots.Dequeue();
+        return m_pestAngles[slotIndex];// + m_pestPrefab.GetComponent<PestController>().m_moveSpeed * Time.time / Time.deltaTime;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -59,8 +133,7 @@ public class PlanetController : MonoBehaviour
         m_position = NextPosition3d(m_angle);
         this.gameObject.transform.position = m_position;
 
-        // test
-        humanCount += 1;
+        m_mesh.transform.eulerAngles = new Vector3(0, m_mesh.transform.eulerAngles.y + Time.deltaTime * m_meshRotationSpeed, 0);
 
         UpdateSpawner();
     }
@@ -123,6 +196,11 @@ public class PlanetController : MonoBehaviour
     {
         m_holdingSomething = false;
         m_myHands.Release();
+    }
+
+    public float GetRadius()
+    {
+        return transform.localScale.x / 2;
     }
 
     private void OnDrawGizmos()
