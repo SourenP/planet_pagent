@@ -2,6 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace UnityTemplateProjects
+{
+    public class MyRandom
+    {
+        // Randomly select an index of a non-empty array of weights. Selects an
+        // index with probability proportional to the weight at that index.
+        static public int selectFromWeights(float[] weights)
+        {
+            int len = weights.Length;
+            if (len == 0)
+            {
+                Debug.Log("Warning: `selectFromWeights` called with empty array");
+                return 0;
+            }
+
+            // Find cumulative weights
+            float[] cumulative_weights = new float[len];
+            float cumulative_weight = 0.0f;
+            for (int i = 0; i < len; i++)
+            {
+                cumulative_weight += weights[i];
+                cumulative_weights[i] = cumulative_weight;
+            }
+
+            // Roll
+            float r = Random.Range(0.0f, cumulative_weight);
+            for (int i = 0; i < len; i++)
+            {
+                if (r <= cumulative_weights[i])
+                {
+                    return i;
+                }
+            }
+
+            // This should never be reached
+            Debug.Log("Something bad happened in function `selectFromWeights`");
+            return 0;
+        }
+    }
+}
+
 public class GameHandler : MonoBehaviour
 {
     public Camera m_camera;
@@ -15,45 +56,65 @@ public class GameHandler : MonoBehaviour
     public GameObject m_asteroidPrefab;
     public GameObject m_shipPrefab;
     public GameObject m_orbitalProblemSpawner;
+    public float m_astroidSpawnerDeviation = 0.1f;
+    public float m_astroidSpawnerAngleDeviation = 30f;
+    float m_currentAstroidSpawnerAngle = 0;
+    public GameObject m_astroidSpawnerInner;
+    public GameObject m_astroidSpawnerOuter;
     public BackgroundHandler m_backgroundHandler;
 
     public PlanetController m_planet;
 
     public TextureGenerator m_textureGenerator;
     Texture2D m_astroidTexture;
-    
-
 
     // Start is called before the first frame update
     void Start()
     {
         m_astroidTexture = m_textureGenerator.GenerateTexture(256, 256, 100f);
 
-        for (int i = 0; i < m_astroidCount; ++i)
-        { 
-            SpawnAsteroid();
-        }
-
+        m_backgroundHandler.Init();
         m_backgroundHandler.Init();
         m_planet.Init();
 
-        //StartCoroutine(MaybeSpawnAProblem());
+
+        m_currentAstroidSpawnerAngle = m_planet.m_angle + m_astroidSpawnerAngleDeviation;
+
+        StartCoroutine(MaybeSpawnAProblem());
     }
 
     IEnumerator MaybeSpawnAProblem()
     {
-        yield return new WaitForSeconds(5);
-        int random = Random.Range(1, 100);
-        
-        if(random < 50)
+        yield return new WaitForSeconds(4);
+        float[] weights = { 1.0f, 0.5f, 0.5f };
+        int type = UnityTemplateProjects.MyRandom.selectFromWeights(weights);
+
+        if(type == (int)PlanetProblem.ProblemType.Asteroid)
         {
-            GameObject ship = Instantiate(m_shipPrefab);
-            ship.transform.position = m_orbitalProblemSpawner.transform.position;
-            ship.GetComponent<ShipController>().Init(this, m_planet, PlanetProblem.ProblemType.BombShip);
+            SpawnAsteroid();
         }
+        else
+        {
+            SpawnShip((PlanetProblem.ProblemType)type);
+        }
+
         StartCoroutine(MaybeSpawnAProblem());
     }
 
+    public Vector3 NextPosition3d(float angle, Vector3 center, float radius)
+    {
+        Vector2 position_2d = NextPosition2d(angle, center, radius);
+        Vector3 position_3d = new Vector3(position_2d.x, position_2d.y, 1f);
+        return position_3d;
+    }
+
+    public Vector2 NextPosition2d(float angle, Vector3 center, float radius)
+    {
+        return new Vector2(
+            center.x + (radius * Mathf.Cos(angle * Mathf.Deg2Rad)),
+            center.y + (radius * Mathf.Sin(angle * Mathf.Deg2Rad))
+        );
+    }
 
     // Update is called once per frame
     void Update()
@@ -73,6 +134,18 @@ public class GameHandler : MonoBehaviour
             ship.transform.position = mousePos;
             ship.GetComponent<ProblemBase>().Init(this, m_planet, PlanetProblem.ProblemType.BombShip);
 
+        }
+
+        {
+            m_currentAstroidSpawnerAngle += m_planet.m_speed * Time.deltaTime;
+            Vector3 position = m_planet.NextPosition3d(m_currentAstroidSpawnerAngle);
+
+            Vector3 sunToPlanet = (position - m_planet.m_sun.transform.position).normalized;
+
+            Vector3 idontcareanymore = sunToPlanet * m_astroidSpawnerDeviation; 
+
+            m_astroidSpawnerInner.transform.position = position - idontcareanymore;
+            m_astroidSpawnerOuter.transform.position = position + idontcareanymore;
         }
     }
 
@@ -98,67 +171,27 @@ public class GameHandler : MonoBehaviour
 
     void SpawnAsteroid()
     {
+        int random = Random.Range(1, 100);
+
         GameObject ast = Instantiate(m_asteroidPrefab);
-        AsteroidController astCont = ast.GetComponent<AsteroidController>();
-
-        RandomizeAsteroid(astCont);
-
-        astCont.SetTexture(m_astroidTexture);
-    }
-
-    public void RandomizeAsteroid(AsteroidController ast)
-    {
-        float mass = 0.2f;
-
-        float camHeight = m_camera.orthographicSize;
-        float camWidth = camHeight * 16 / 9;
-        float despawnY = m_asteroidDespawnBuffer * camHeight;
-        float despawnX = m_asteroidDespawnBuffer * camWidth;
-        Vector3 camPos = m_camera.transform.position;
-
-        Vector3 camSize = new Vector3(camWidth, camHeight);
-
-        Vector3 spawnAreaInnerTR = camPos + camSize;
-        Vector3 spawnAreaInnerBL = camPos - camSize;
-
-        Vector3 spawnAreaOuterTR = camPos + 2f * camSize;
-        Vector3 spawnAreaOuterBL = camPos - 2f * camSize;
-
-        float posX, posY;
-
-        int dice = Random.Range(-1, 1);
-        if(dice == 0)
+        if (random < 50)
         {
-            posX = Random.Range(spawnAreaOuterBL.x, spawnAreaOuterTR.x);
-            dice = Random.Range(-1, 1);
-            if (dice == 0)
-            {
-                posY = Random.Range(spawnAreaInnerTR.y, spawnAreaOuterTR.y);
-            }
-            else
-            {
-                posY = Random.Range(spawnAreaOuterBL.y, spawnAreaInnerBL.y);
-            }
-
+            ast.transform.position = m_astroidSpawnerInner.transform.position;
         }
         else
         {
-            posY = Random.Range(spawnAreaOuterBL.y, spawnAreaOuterTR.y);
-            dice = Random.Range(-1, 1);
-            if (dice == 0)
-            {
-                posX = Random.Range(spawnAreaInnerTR.x, spawnAreaOuterTR.x);
-            }
-            else
-            {
-                posX = Random.Range(spawnAreaOuterBL.x, spawnAreaInnerBL.x);
-            }
+            ast.transform.position = m_astroidSpawnerOuter.transform.position;
         }
-
-
-        Debug.Log(mass);
-
+        ast.GetComponent<ProblemBase>().Init(this, m_planet, PlanetProblem.ProblemType.Asteroid);
     }
+
+    void SpawnShip(PlanetProblem.ProblemType type)
+    {
+        GameObject ship = Instantiate(m_shipPrefab);
+        ship.transform.position = m_orbitalProblemSpawner.transform.position;
+        ship.GetComponent<ProblemBase>().Init(this, m_planet, type);
+    }
+    
     private void OnDrawGizmos()
     {
         float camHeight = m_camera.orthographicSize;
@@ -182,6 +215,9 @@ public class GameHandler : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(camPos, spawnAreaOuterTR - spawnAreaOuterBL);
 
-        //Gizmos.DrawSphere(m_orbitalProblemSpawner.transform.position, 0.5f);
+        
+        Gizmos.DrawSphere(m_orbitalProblemSpawner.transform.position, 0.2f);
+        Gizmos.DrawSphere(m_astroidSpawnerInner.transform.position, 0.1f);
+        Gizmos.DrawSphere(m_astroidSpawnerOuter.transform.position, 0.1f);
     }
 }

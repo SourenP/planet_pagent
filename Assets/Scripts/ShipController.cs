@@ -56,7 +56,6 @@ public class ShipController : ProblemBase
         } while (h > 0.0f);
 
         // Bisect the search interval until its length is smaller than t_eps
-        Debug.Log("t1 " + t1);
         float t_mid;
         while (t1 - t0 > t_eps)
         {
@@ -82,8 +81,6 @@ public class ShipController : ProblemBase
 
         // Get the position of the planet relative to the ship's starting position at the time of intersection
         float intersect_t = 0.5f * (t0 + t1);
-        Debug.Log("intersect_t " + intersect_t);
-
         Vector2 intersect_dxy = m_planet.NextPosition2d((planet_angle + intersect_t * planet_angle_speed)) - ship_pos;
         float intersect_length = intersect_dxy.magnitude;
         // float intersect_dx = orbit_x_radius * Mathf.Cos((planet_angle * Mathf.Deg2Rad + intersect_t * planet_angle_speed)* Mathf.Deg2Rad) - ship_pos.x;
@@ -106,13 +103,14 @@ public class ShipController : ProblemBase
     // Start is called before the first frame update
     void Start()
     {
+
         //m_direction = getShipDirection(
         //    m_planet.m_angle,
         //    m_planet.m_speed,
         //    new Vector2(transform.position.x, transform.position.y),
         //    m_speed
         //);
-        ReleasePests();
+       // ReleasePests();
         Init(m_gameHandler, m_planet, m_problemType);
         Debug.Log("direction " + m_direction);
     }
@@ -120,15 +118,15 @@ public class ShipController : ProblemBase
     public override void Init(GameHandler gameHandler, PlanetController planet, PlanetProblem.ProblemType type)
     {
         base.Init(gameHandler, planet, type);
-        //m_direction = getShipDirection(
-        //    m_planet.m_angle,
-        //    m_planet.m_speed,
-        //    new Vector2(transform.position.x, transform.position.y),
-        //    m_speed
-        //);
-        //transform.forward = new Vector3(m_direction.x, 0, m_direction.y);
+        m_direction = getShipDirection(
+            m_planet.m_angle,
+            m_planet.m_speed,
+            new Vector2(transform.position.x, transform.position.y),
+            m_speed
+        );
+        transform.up = m_direction;
 
-        if(m_problemType == PlanetProblem.ProblemType.WreckingShip)
+        if (m_problemType == PlanetProblem.ProblemType.WreckingShip)
         {
             m_renderer.sprite = m_wreckingShipSprite;
         }
@@ -142,12 +140,13 @@ public class ShipController : ProblemBase
     // Update is called once per frame
     void Update()
     {
-        // m_direction = getShipDirection(
-        //     m_planet.m_angle,
-        //     m_planet.m_speed,
-        //     new Vector2(transform.position.x, transform.position.y),
-        //     m_speed
-        // );
+        // DO NOT DO THIS
+        //m_direction = getShipDirection(
+        //    m_planet.m_angle,
+        //    m_planet.m_speed,
+        //    new Vector2(transform.position.x, transform.position.y),
+        //    m_speed
+        //);
         transform.position += m_direction * m_speed * Time.deltaTime;
     }
 
@@ -158,11 +157,15 @@ public class ShipController : ProblemBase
 
         m_speed = 0;
         gameObject.transform.parent = other.transform;
+
+        StartExplosionTimer(true);
+
     }
 
     public override void Grabbed()
     {
-        if(m_problemType == PlanetProblem.ProblemType.BombShip)
+        m_speed = 0;
+        if (m_problemType == PlanetProblem.ProblemType.BombShip)
         {
             StartExplosionTimer(false);
         }
