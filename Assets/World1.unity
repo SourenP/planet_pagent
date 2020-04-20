@@ -473,28 +473,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75585985ad8faf64291de58581e1160f, type: 3}
---- !u!1 &1509466087 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2589865215472853761, guid: 85a54eaef95141a4c8b6c1d20964720a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7332160466143637931}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1509466091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1509466087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 963e625d75a89dd4185d8bd19a0df26f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  facePrefab: {fileID: 3439879062450156630, guid: 130e056b695a464429dbb866c8a04065,
-    type: 3}
-  spriteScale: {x: 0.7, y: 0.7, z: 0.1}
-  spritePosition: {x: 0, y: 0, z: -2}
 --- !u!1001 &1546047471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -602,22 +580,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7988843008556287298}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1618798109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618798104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 963e625d75a89dd4185d8bd19a0df26f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  facePrefab: {fileID: 6787654743280803369, guid: f9b990b64f60024408fe9207dea0cb4a,
-    type: 3}
-  spriteScale: {x: 0.6, y: 0.6, z: 0.6}
-  spritePosition: {x: 0, y: 0, z: -1.5}
 --- !u!1 &1986851981
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +691,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7332160466143637931}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1509466087}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c42e42d9dd9c2bc47a87a008a57ece80, type: 3}
@@ -816,51 +778,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: ColorModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key0.g
-      value: 0.9960785
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key0.b
-      value: 0.9843138
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.g
-      value: 0.9960785
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914773576875, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.b
-      value: 0.9843138
-      objectReference: {fileID: 0}
-    - target: {fileID: 1794009914916724388, guid: f35e998a2f030d344b785ce471d98f70,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1794009915108403175, guid: f35e998a2f030d344b785ce471d98f70,
         type: 3}
       propertyPath: m_LocalPosition.x
