@@ -11,12 +11,21 @@ public class ShipController : ProblemBase
     public int m_pestCount = 10;
     public float m_speed = 0.2f;
 
+    Transform m_transform;
+    public Vector3 spriteScale = new Vector3(0.5f, 0.5f, 0f);
+
     public SpriteRenderer m_renderer;
     public Sprite m_wreckingShipSprite;
     public Sprite m_bombShipSprite;
 
     public GameObject m_pestPrefab;
     public float m_pestSpawnInterval = 0.1f;
+
+    public GameObject m_wreckingShipPrefab;
+    public GameObject m_bombShipPrefab;
+
+    GameObject m_wreckingShip;
+    GameObject m_bombShip;
 
     Vector3 m_direction;
     Vector3 getShipDirection(
@@ -113,6 +122,19 @@ public class ShipController : ProblemBase
        // ReleasePests();
         Init(m_gameHandler, m_planet, m_problemType);
         Debug.Log("direction " + m_direction);
+
+        m_transform = GetComponent<Transform>(); 
+
+        if (m_problemType == PlanetProblem.ProblemType.WreckingShip)
+        {
+            m_wreckingShip = Instantiate(m_wreckingShipPrefab, m_transform);
+            m_wreckingShip.GetComponent<Transform>().localScale = spriteScale;
+        }
+        else
+        {
+            m_bombShip = Instantiate(m_bombShipPrefab, m_transform);
+            m_bombShip.GetComponent<Transform>().localScale = spriteScale;
+        }
     }
 
     public override void Init(GameHandler gameHandler, PlanetController planet, PlanetProblem.ProblemType type)
@@ -125,15 +147,6 @@ public class ShipController : ProblemBase
             m_speed
         );
         transform.up = m_direction;
-
-        if (m_problemType == PlanetProblem.ProblemType.WreckingShip)
-        {
-            m_renderer.sprite = m_wreckingShipSprite;
-        }
-        else
-        {
-            m_renderer.sprite = m_bombShipSprite;
-        }
 
     }
 
