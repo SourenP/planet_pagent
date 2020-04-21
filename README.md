@@ -1,10 +1,11 @@
-# planet_pagent
+# Inhabitable
 
+Ludum Dare 46 submission: https://ldjam.com/events/ludum-dare/46/inhabitable
+Play here: https://inzombiak.itch.io/inhabitable
 
 You and your Sun have been chilling for eons, but pests have started showing up trying to infest you.
 
 It's only a matter of time until they sap you of any nature and wonders you had. Use your hands to grab the invaders and chuck em into the Sun before they cover you with industry and late-stage capitalism.
-
 
 Controls:
 
