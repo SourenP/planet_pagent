@@ -24,4 +24,10 @@ public class ProblemBase : MonoBehaviour
     {
 
     }
+
+    public void Update()
+    {
+        if ((gameObject.transform.position - m_gameHandler.gameObject.transform.position).sqrMagnitude > 400)
+            Destroy(this.gameObject);
+    }
 }

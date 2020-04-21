@@ -98,7 +98,7 @@ public class GameHandler : MonoBehaviour
         yield return new WaitForSeconds(m_spawnTime);
         if (m_gameStarted)
         {
-            float[] weights = { .5f, 0.75f, 0.75f };
+            float[] weights = { .25f, 0.75f, 0.75f };
             int type = UnityTemplateProjects.MyRandom.selectFromWeights(weights);
 
             if (type == (int)PlanetProblem.ProblemType.Asteroid)

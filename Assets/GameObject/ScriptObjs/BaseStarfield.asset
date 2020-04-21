@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba9f19d25b52dc44a5718fedfd54ee4, type: 3}
   m_Name: BaseStarfield
   m_EditorClassIdentifier: 
-  maxStars: 300
+  maxStars: 15
   starSize: 0.1
   starSizeRange: 0.5
   parallaxFactor: 0.5

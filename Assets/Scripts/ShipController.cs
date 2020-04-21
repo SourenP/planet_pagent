@@ -168,6 +168,7 @@ public class ShipController : ProblemBase
     // Update is called once per frame
     void Update()
     {
+        base.Update();
         // DO NOT DO THIS
         //m_direction = getShipDirection(
         //    m_planet.m_angle,
