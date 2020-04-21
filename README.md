@@ -15,6 +15,3 @@ Controls:
 - Use asteroids to bash em out of the way
 
 ![demo](screenshots/planet_pagent_demo_5.gif)
-
-## Todo
-- [ ] Fix spelling of "pageant"
