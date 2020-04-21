@@ -1,13 +1,16 @@
 # Inhabitable
 
 Ludum Dare 46 submission: https://ldjam.com/events/ludum-dare/46/inhabitable
+
 Play here: https://inzombiak.itch.io/inhabitable
 
+
+#### Intro
 You and your Sun have been chilling for eons, but pests have started showing up trying to infest you.
 
 It's only a matter of time until they sap you of any nature and wonders you had. Use your hands to grab the invaders and chuck em into the Sun before they cover you with industry and late-stage capitalism.
 
-Controls:
+#### Controls
 
 - Use mouse to move arms around.
 - Click and hold to grab, then flick into the sun.
@@ -15,3 +18,11 @@ Controls:
 - Use asteroids to bash em out of the way
 
 ![demo](screenshots/planet_pagent_demo_5.gif)
+
+#### Todo
+- [ ] Optimize build to not be laggy
+
+#### Authors
+- [awjchen](https://github.com/awjchen)
+- [inzombiak](https://github.com/inzombiak)
+- [sourenp](https://github.com/sourenp)
