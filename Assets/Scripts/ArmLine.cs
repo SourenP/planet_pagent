@@ -68,7 +68,6 @@ public class ArmLine : MonoBehaviour
 
         // lineRenderer.SetPosition(0, start);
         // lineRenderer.SetPosition(1, end);
-        Debug.Log(maxArmLength);
         Vector3 pointingDir = drawArmParabola(start, end, angleOffset != 0, maxArmLength);
         pointingDir.z = 0;
         openGloveTransform.position = end;

@@ -19,7 +19,7 @@ public class Grabbable : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (!m_isGrabbed && m_caressedByGrubbyHands && (Input.GetMouseButton(0)) && !m_planetController.m_holdingSomething)
         {

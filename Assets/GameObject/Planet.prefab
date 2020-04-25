@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42e42d9dd9c2bc47a87a008a57ece80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_gameHandler: {fileID: 0}
   m_sun: {fileID: 0}
   m_height: 2
   m_width: 2.5
@@ -74,6 +75,7 @@ MonoBehaviour:
   m_spawnerSpeed: 1
   m_grabWithoutClick: 0
   m_myHands: {fileID: 7332160466724842548}
+  m_arms: {fileID: 0}
   m_mesh: {fileID: 2591703599690403779}
   m_meshRotationSpeed: 10
   m_clockwise: 0
@@ -83,6 +85,8 @@ MonoBehaviour:
   m_pestPrefab: {fileID: 6459943241968100790, guid: 7ed28a2d4d1c49845a585df89710dda3,
     type: 3}
   m_pestCount: 0
+  m_infestaitonCount: 200
+  m_infestInterval: 0.01
 --- !u!114 &7332160465692802919
 MonoBehaviour:
   m_ObjectHideFlags: 0

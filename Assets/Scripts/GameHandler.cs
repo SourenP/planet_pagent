@@ -83,11 +83,7 @@ public class GameHandler : MonoBehaviour
         m_spawnTime = m_defaultSpawnTime;
         m_astroidTexture = m_textureGenerator.GenerateTexture(256, 256, 100f);
 
-        m_backgroundHandler.Init();
-        m_backgroundHandler.Init();
         m_planet.Init();
-
-
         m_currentAstroidSpawnerAngle = m_planet.m_angle + m_astroidSpawnerAngleDeviation;
 
         StartCoroutine(MaybeSpawnAProblem());

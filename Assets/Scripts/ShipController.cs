@@ -166,7 +166,7 @@ public class ShipController : ProblemBase
     }
 
     // Update is called once per frame
-    void Update()
+   public override void Update()
     {
         base.Update();
         // DO NOT DO THIS

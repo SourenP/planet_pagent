@@ -31,6 +31,10 @@ public class Hands : MonoBehaviour
         {
             m_planet.Release();
         }
+    }
+
+    private void FixedUpdate()
+    {
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -42,7 +46,7 @@ public class Hands : MonoBehaviour
 
         m_mouseBuffer.Add(mousePosition - m_lastMousePosition);
 
-        m_mouseVelocity = m_mouseBuffer[m_mouseBuffer.Count-1];
+        m_mouseVelocity = m_mouseBuffer[m_mouseBuffer.Count - 1];
 
         for (int i = m_mouseBuffer.Count - 2; i > -1; --i)
         {
@@ -54,10 +58,12 @@ public class Hands : MonoBehaviour
         m_mouseVelocity.z = 0;
         m_rigidBody.velocity = m_mouseVelocity;
     }
-    
+
     public void Attach(GameObject other)
     {
-        other.transform.position = this.transform.position;
+        //other.transform.parent = null;
+        m_joint.transform.position = other.transform.position;
+        //other.transform.position = this.transform.position;
         m_joint.connectedBody = other.GetComponent<Rigidbody>();
     }
 
